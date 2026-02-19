@@ -18,7 +18,7 @@ Capture, organize, and manage project ideas in the PlanKit ideas file.
 Before any operation, locate the PlanKit folder and read its config:
 
 1. Check if `PlanKit/` exists in the project root. If not, check `plan-kit/`.
-2. If neither exists, tell the user: "No PlanKit folder found. Run `/plankit:init` to set up PlanKit first."
+2. If neither exists, tell the user: "No PlanKit folder found. Run `/plan-kit:init` to set up PlanKit first."
 3. Read `.config.json` from the PlanKit folder to get the naming convention and split threshold.
 
 Determine the ideas file path:

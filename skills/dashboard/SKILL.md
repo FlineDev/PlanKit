@@ -23,7 +23,7 @@ This skill has **no command**. It triggers automatically when the user discusses
 Before any operation, locate the PlanKit folder and read its config:
 
 1. Check if `PlanKit/` exists in the project root. If not, check `plan-kit/`.
-2. If neither exists, tell the user: "No PlanKit folder found. Run `/plankit:init` to set up PlanKit first."
+2. If neither exists, tell the user: "No PlanKit folder found. Run `/plan-kit:init` to set up PlanKit first."
 3. Read `.config.json` from the PlanKit folder to get the naming convention.
 
 Determine file paths:
@@ -36,7 +36,7 @@ Determine file paths:
 
 When the user asks about status/progress:
 
-1. **Read Progress.md** — if it doesn't exist, tell the user: "No Progress.md yet. It's created when you plan your first version with `/plankit:2-roadmap`."
+1. **Read Progress.md** — if it doesn't exist, tell the user: "No Progress.md yet. It's created when you plan your first version with `/plan-kit:2-roadmap`."
 2. **Display a visual summary** in chat:
 
    ```

@@ -27,11 +27,11 @@ Start Claude Code (`claude`), then run these three commands inside it:
 ```
 
 ```
-/plugin install plankit
+/plugin install plan-kit
 ```
 
 ```
-/plankit:init
+/plan-kit:init
 ```
 
 **Manual**
@@ -40,16 +40,16 @@ Start Claude Code (`claude`), then run these three commands inside it:
 /plugin install https://github.com/FlineDev/PlanKit.git
 ```
 
-Then run `/plankit:init` in your project directory.
+Then run `/plan-kit:init` in your project directory.
 
 ## Commands
 
 | Command | Purpose |
 |---------|---------|
-| `/plankit:init` | First-time setup, convention detection, migration |
-| `/plankit:1-idea` | Capture a new idea (or brain-dump several) |
-| `/plankit:2-roadmap` | Triage ideas into a versioned release plan |
-| `/plankit:3-steps` | Break a roadmap feature into implementation steps |
+| `/plan-kit:init` | First-time setup, convention detection, migration |
+| `/plan-kit:1-idea` | Capture a new idea (or brain-dump several) |
+| `/plan-kit:2-roadmap` | Triage ideas into a versioned release plan |
+| `/plan-kit:3-steps` | Break a roadmap feature into implementation steps |
 
 The numbered prefixes (1, 2, 3) reflect the natural workflow order.
 
@@ -80,7 +80,7 @@ PlanKit/
     └── 002-SmartReminders.md
 ```
 
-The naming convention is auto-detected during `/plankit:init` — Swift/Apple projects get UpperCamelCase (shown above), while JS/web projects get kebab-case (`plan-kit/`, `ideas.md`, etc.). The convention is stored in `.config.json`.
+The naming convention is auto-detected during `/plan-kit:init` — Swift/Apple projects get UpperCamelCase (shown above), while JS/web projects get kebab-case (`plan-kit/`, `ideas.md`, etc.). The convention is stored in `.config.json`.
 
 ## Detail Levels — A Concrete Example
 
@@ -147,7 +147,7 @@ Each level adds more specificity. Ideas capture the "what if", the roadmap adds 
 The dashboard (Progress.md) updates automatically throughout all stages — no separate command needed.
 
 ### Ideas → Roadmap (Extraction)
-When an idea is selected for the roadmap during `/plankit:2-roadmap`, it is **moved** (not copied) from the Ideas file to the Roadmap. All content is preserved and enriched with key decisions from the triage conversation. Progress.md is created with the new version and its features.
+When an idea is selected for the roadmap during `/plan-kit:2-roadmap`, it is **moved** (not copied) from the Ideas file to the Roadmap. All content is preserved and enriched with key decisions from the triage conversation. Progress.md is created with the new version and its features.
 
 ### Steps → Completion
 When a step is done, PlanKit suggests deleting the step file and updates Progress.md. When all steps for a feature are complete, the feature folder is cleaned up and the roadmap feature is marked with a checkmark.

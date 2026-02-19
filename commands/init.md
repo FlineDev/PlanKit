@@ -165,7 +165,7 @@ Create the Features directory (empty).
     "header": "Ideas",
     "options": [
       {"label": "Yes, let me share", "description": "Brain-dump some ideas interactively"},
-      {"label": "No, later", "description": "I'll add ideas later with /plankit:1-idea"}
+      {"label": "No, later", "description": "I'll add ideas later with /plan-kit:1-idea"}
     ],
     "multiSelect": false
   }]
@@ -190,9 +190,9 @@ Convention: [UpperCamelCase or kebab-case]
 
 📋 How to use PlanKit (in order):
 
-1. /plankit:1-idea   — Capture ideas anytime
-2. /plankit:2-roadmap — Plan your next version
-3. /plankit:3-steps   — Break features into tasks
+1. /plan-kit:1-idea   — Capture ideas anytime
+2. /plan-kit:2-roadmap — Plan your next version
+3. /plan-kit:3-steps   — Break features into tasks
 
 Or just talk naturally — PlanKit picks up on
 planning-related conversations automatically.
