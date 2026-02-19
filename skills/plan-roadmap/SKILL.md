@@ -57,6 +57,7 @@ This is the primary workflow — turning ideas into a versioned roadmap:
    - **Single-file mode**: DELETE them from Ideas.md (they now live in the Roadmap)
    - **Split mode**: DELETE them from the appropriate topic file(s) under Ideas/. Update word counts in index.md. If a topic file becomes empty after extraction, delete it and remove its entry from index.md.
    - Ideas now live in the Roadmap — they must not exist in both places.
+   - Note: each topic file contains exactly one theme, so ideas cannot span file boundaries. Identify which topic file(s) contain the selected ideas and extract from the correct file(s).
 8. **Write the version section** in the Roadmap file with all enriched features
 9. **Create or update Progress.md**:
    - **If Progress.md doesn't exist**: create with `# Progress`, `## Current: vX.Y — Subtitle`, features as `Status: Planned` + `(No steps yet)`, and `## Released`

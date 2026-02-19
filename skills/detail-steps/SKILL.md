@@ -109,7 +109,7 @@ Determine file paths:
 
 ## Step Completion
 
-When the user indicates a step is done (or you notice from conversation):
+When the user indicates a step is done (or you notice from conversation), update Progress.md directly here. The dashboard skill also derives feature status from step markers, but explicit updates during interactive workflows ensure accuracy.
 
 1. Ask: "Step [name] is complete. Should I delete the step file?"
 2. If confirmed → delete the step file (tip: suggest committing to git first so content is recoverable via `git show`)

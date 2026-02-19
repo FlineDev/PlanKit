@@ -11,8 +11,8 @@ allowed-tools:
 
 # Plan Roadmap
 
-If the user specified a version or context, use it. Otherwise, the skill handles discovery.
+If the user specified a version or context, pass it along when invoking the skill. Otherwise, the skill handles discovery.
 
-Then follow the `plan-roadmap` skill to triage ideas into a versioned roadmap.
+Invoke the `plan-roadmap` skill to triage ideas into a versioned roadmap.
 
 $ARGUMENTS
