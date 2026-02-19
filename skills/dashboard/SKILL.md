@@ -36,7 +36,7 @@ Determine file paths:
 
 When the user asks about status/progress:
 
-1. **Read Progress.md** — if it doesn't exist, tell the user: "No Progress.md yet. It's created when you plan your first version with `/plan-kit:2-roadmap`."
+1. **Read Progress.md** — if it doesn't exist, tell the user: "No Progress.md yet. It's created when you plan your first version with `/plan-kit:plan-roadmap`."
 2. **Display a visual summary** in chat:
 
    ```

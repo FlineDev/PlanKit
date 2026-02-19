@@ -10,9 +10,9 @@ Initial release.
 - **detail-steps** skill — break roadmap features into session-sized, design-first implementation steps
 - **dashboard** skill — automatic progress tracking via Progress.md with step markers, version releases, and git recovery
 - `/plan-kit:init` command — first-time setup with convention detection, migration, and onboarding
-- `/plan-kit:1-idea` command — quick entry point for capturing ideas
-- `/plan-kit:2-roadmap` command — quick entry point for roadmap planning
-- `/plan-kit:3-steps` command — quick entry point for step breakdown
+- `/plan-kit:capture-idea` command — quick entry point for capturing ideas
+- `/plan-kit:plan-roadmap` command — quick entry point for roadmap planning
+- `/plan-kit:define-steps` command — quick entry point for step breakdown
 - Two naming conventions: UpperCamelCase (Swift/Apple) and kebab-case (JS/web)
 - Auto-split for Ideas and Roadmap files when they exceed the configured word threshold
 - Full lifecycle management: ideas → roadmap extraction → step completion → cleanup

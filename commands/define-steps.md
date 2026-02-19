@@ -9,7 +9,7 @@ allowed-tools:
   - AskUserQuestion
 ---
 
-# Detail Steps
+# Define Steps
 
 If the user specified a feature name, pass it along when invoking the skill. Otherwise, the skill presents roadmap features to choose from.
 
