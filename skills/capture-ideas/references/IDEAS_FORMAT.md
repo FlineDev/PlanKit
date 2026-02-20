@@ -52,13 +52,13 @@ When Ideas file grows beyond the configured word threshold, it splits into a dir
 
 ```
 PlanKit/Ideas/          (or plan-kit/ideas/)
-├── index.md
+├── Index.md            (or index.md)
 ├── UIDesign.md         (or ui-design.md)
 ├── Performance.md      (or performance.md)
 └── Social.md           (or social.md)
 ```
 
-### index.md format:
+### Index.md format (or index.md for kebab-case):
 
 ```markdown
 # Ideas

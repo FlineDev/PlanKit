@@ -128,13 +128,13 @@ When Roadmap file grows beyond the configured word threshold:
 
 ```
 PlanKit/Roadmap/        (or plan-kit/roadmap/)
-├── index.md
+├── Index.md            (or index.md)
 ├── V2_0.md             (or v2-0.md)
 ├── V1_5.md             (or v1-5.md)
 └── V1_0.md             (or v1-0.md)
 ```
 
-### index.md format:
+### Index.md format (or index.md for kebab-case):
 
 ```markdown
 # Roadmap

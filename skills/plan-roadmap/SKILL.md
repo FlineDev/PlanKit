@@ -32,7 +32,7 @@ Determine file paths:
 
 This is the primary workflow — turning ideas into a versioned roadmap:
 
-1. **Read Ideas file** — load all current ideas (handle split mode: read index.md then relevant topic files)
+1. **Read Ideas file** — load all current ideas (handle split mode: read the index file then relevant topic files)
 2. **Read existing Roadmap** — understand what versions and features already exist
 3. **Detect current project version**:
    - Check for Xcode project (Marketing Version in pbxproj)
@@ -55,7 +55,7 @@ This is the primary workflow — turning ideas into a versioned roadmap:
    - Carry over ALL content from the idea: descriptions, links, examples, motivation
 7. **Extract included ideas from the Ideas file**:
    - **Single-file mode**: DELETE them from Ideas.md (they now live in the Roadmap)
-   - **Split mode**: DELETE them from the appropriate topic file(s) under Ideas/. Update word counts in index.md. If a topic file becomes empty after extraction, delete it and remove its entry from index.md.
+   - **Split mode**: DELETE them from the appropriate topic file(s) under Ideas/. Update word counts in the index file. If a topic file becomes empty after extraction, delete it and remove its entry from the index file.
    - Ideas now live in the Roadmap — they must not exist in both places.
    - Note: each topic file contains exactly one theme, so ideas cannot span file boundaries. Identify which topic file(s) contain the selected ideas and extract from the correct file(s).
 8. **Write the version section** in the Roadmap file with all enriched features
@@ -100,11 +100,11 @@ When the roadmap file exceeds the configured `splitThreshold` word count:
    - UpperCamelCase: `PlanKit/Roadmap/V2_0.md` (dots become underscores)
    - kebab-case: `plan-kit/roadmap/v2-0.md` (dots become hyphens)
 4. Each version file: H1 = version header, then all features from that version
-5. Create `index.md` with overview table (version, status, file link, word count)
+5. Create `Index.md` (UpperCamelCase) or `index.md` (kebab-case) with overview table (version, status, file link, word count)
 6. Delete the original single Roadmap file
 7. Tell the user about the split
 
-When already in split mode, write to the relevant version file and update `index.md`.
+When already in split mode, write to the relevant version file and update the index file.
 
 ## Important Rules
 

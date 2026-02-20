@@ -23,7 +23,7 @@ Before any operation, locate the PlanKit folder and read its config:
 
 Determine the ideas file path:
 - **Single file mode**: `PlanKit/Ideas.md` (UpperCamelCase) or `plan-kit/ideas.md` (kebab-case)
-- **Split mode**: `PlanKit/Ideas/` directory with `index.md` (UpperCamelCase) or `plan-kit/ideas/` (kebab-case)
+- **Split mode**: `PlanKit/Ideas/` directory with `Index.md` (UpperCamelCase) or `plan-kit/ideas/` with `index.md` (kebab-case)
 - **Progress**: `PlanKit/Progress.md` or `plan-kit/progress.md` (if it exists — used for dashboard context)
 
 Check which mode is active by testing if the Ideas directory exists.
@@ -32,7 +32,7 @@ Check which mode is active by testing if the Ideas directory exists.
 
 When the user shares an idea (explicitly or in conversation):
 
-1. **Read the existing ideas file** (or index.md + relevant topic file if split)
+1. **Read the existing ideas file** (or the index file + relevant topic file if split)
 2. **Understand the idea fully** — ask clarifying questions ONLY if the idea is genuinely ambiguous. Do NOT ask unnecessary questions just to seem thorough. If the user gave enough context, proceed directly.
 3. **Find the right theme group**:
    - Scan existing `## Theme` headers for a good fit
@@ -74,11 +74,11 @@ When the ideas file exceeds the configured `splitThreshold` word count:
    - UpperCamelCase: `PlanKit/Ideas/ThemeName.md` (spaces removed, each word capitalized)
    - kebab-case: `plan-kit/ideas/theme-name.md` (lowercase, hyphens)
 4. Each topic file: H1 = theme name, then all content from that theme section
-5. Create `index.md` with overview table (topic, file link, approximate word count)
+5. Create `Index.md` (UpperCamelCase) or `index.md` (kebab-case) with overview table (topic, file link, approximate word count)
 6. Delete the original single Ideas file
 7. Tell the user: "Your ideas file grew past [threshold] words — I've split it into [N] topic files for easier navigation."
 
-When already in split mode, write to the relevant topic file and update word counts in `index.md`.
+When already in split mode, write to the relevant topic file and update word counts in the index file.
 
 ## Format Reference
 

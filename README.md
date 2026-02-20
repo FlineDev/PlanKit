@@ -155,7 +155,7 @@ When a version ships, completed features are slimmed to just names in both the R
 
 ## Auto-Split
 
-When Ideas or Roadmap files grow beyond 5,000 words (configurable in `.config.json`), PlanKit automatically splits them into a directory of topic files with an `index.md` overview. This keeps individual files manageable while preserving all content.
+When Ideas or Roadmap files grow beyond 5,000 words (configurable in `.config.json`), PlanKit automatically splits them into a directory of topic files with an `Index.md` (or `index.md` for kebab-case) overview. This keeps individual files manageable while preserving all content.
 
 ## Philosophy
 
