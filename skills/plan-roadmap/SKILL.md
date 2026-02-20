@@ -57,35 +57,41 @@ This is the primary workflow — turning ideas into a versioned roadmap:
 
 ### If the roadmap is empty (fresh triage):
 
-5. **Determine target version** — if the user specified one, use it. Otherwise, suggest the next logical version and confirm.
-6. **Present ideas for triage** — show ideas grouped by theme. For each idea (or group of related ideas):
+5. **Investigate and summarize** — tell the user: "Let me review your ideas and investigate the codebase to suggest what makes sense for the next version."
+   - Read all ideas grouped by theme
+   - Investigate the codebase: read project docs, check current implementation state, understand what's already built vs. what's planned
+   - **Present a summary**: ideas count by theme, current app state observations, and a recommendation for which ideas seem most impactful or foundational for the next version
+6. **Determine target version** — if the user specified one, use it. Otherwise, suggest the next logical version based on your investigation and confirm.
+7. **Present ideas for triage** — show ideas grouped by theme. For each idea (or group of related ideas):
    - Display the idea summary
+   - Include your recommendation based on the investigation (e.g., "This builds on existing infrastructure" or "This requires new foundation work")
    - Use AskUserQuestion: **Include in [version]** / **Skip (keep in ideas)** / **Discuss further**
-   - If "Discuss further": ask clarifying questions about edge cases, technical direction, scope. These questions should focus on the BIGGEST unknowns — don't ask about trivia. Then re-ask include/skip.
-7. **For each included idea**:
+   - If "Discuss further": ask clarifying questions grounded in what you found in the codebase, then re-ask include/skip.
+8. **For each included idea**:
    - Ask 1-3 targeted clarifying questions to resolve the biggest uncertainties. Focus on:
      - Edge cases that affect the feature's scope
      - Technical direction choices (which framework, which approach)
      - Key constraints (performance targets, compatibility requirements)
+   - Questions must be specific — reference actual code, docs, or architecture you found, not generic questions
    - Record answers as **Key decisions**
    - Note remaining unknowns as **Open questions**
    - Carry over ALL content from the idea: descriptions, links, examples, motivation
 
 ### After triage (both paths):
 
-8. **Extract included ideas from the Ideas file**:
+9. **Extract included ideas from the Ideas file**:
    - **Single-file mode**: DELETE them from Ideas.md (they now live in the Roadmap)
    - **Split mode**: DELETE them from the appropriate topic file(s) under Ideas/. Update word counts in the index file. If a topic file becomes empty after extraction, delete it and remove its entry from the index file.
    - Ideas now live in the Roadmap — they must not exist in both places.
    - Note: each topic file contains exactly one theme, so ideas cannot span file boundaries. Identify which topic file(s) contain the selected ideas and extract from the correct file(s).
-9. **Write the version section(s)** in the Roadmap file with all enriched features
-10. **MANDATORY — Create or update Progress.md** (do not skip this step, even when refining an existing roadmap):
+10. **Write the version section(s)** in the Roadmap file with all enriched features
+11. **MANDATORY — Create or update Progress.md** (do not skip this step, even when refining an existing roadmap):
     - See [DASHBOARD_FORMAT.md](references/DASHBOARD_FORMAT.md) for the exact format specification.
     - **If Progress.md doesn't exist**: create with `# Progress`, `## Current: vX.Y — Subtitle`, features as `Status: Planned` + `(No steps yet)`, and `## Released`
     - **If Progress.md exists with matching version**: merge — preserve existing features with their current status and steps, add only NEW features as `Status: Planned` + `(No steps yet)`
     - **If Progress.md exists with a DIFFERENT version**: warn the user that there's active progress on a different version. Use AskUserQuestion with options: "Release current version first" / "Replace current version" / "Cancel". If releasing, follow the dashboard skill's version release flow before proceeding. If replacing, move ALL existing Current features to Released (as-is, with today's date) before writing the new version — this prevents silent data loss.
-11. **Check word count** — auto-split if exceeds threshold
-12. **Summarize** — show what changed: features added/moved/removed, ideas remaining
+12. **Check word count** — auto-split if exceeds threshold
+13. **Summarize** — show what changed: features added/moved/removed, ideas remaining
 
 ## Version Management
 
@@ -122,6 +128,8 @@ When already in split mode, write to the relevant version file and update the in
 
 ## Important Rules
 
+- **Narrate your process** — signal what you're investigating: "Let me look into your ideas file and codebase, then I'll summarize what I think makes sense for the roadmap." After reading, present findings before asking questions. Never ask without context.
+- **Ground questions in findings** — reference specific ideas, code patterns, or docs when asking questions. NOT "What's your priority?" but "I found 12 ideas in Marketing and 3 in Algorithm — your codebase shows the algorithm is the foundation for everything else. Should we prioritize algorithm improvements to unblock the rest?"
 - **Extraction is deletion**: when an idea moves to the roadmap, it is REMOVED from the Ideas file. Ideas do not exist in both places.
 - **Preserve all detail**: every link, example, motivation paragraph, and specific number from the idea carries into the roadmap feature entry.
 - **Key decisions are new**: these come from the triage conversation, not from the original idea. They represent choices made during planning.

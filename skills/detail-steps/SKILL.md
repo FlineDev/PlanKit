@@ -33,43 +33,50 @@ Determine file paths:
 1. **Read the Roadmap** — load all active (non-✅) versions and their features
 2. **Select a feature**:
    - If the user specified a feature name → find it in the roadmap
-   - If not → present the active features using AskUserQuestion, letting the user pick which to break down
+   - If not:
+     a. Tell the user: "Let me review your roadmap and codebase first, then I'll help you pick the right feature to break down."
+     b. **Scan the codebase** — read relevant source files, project docs (AGENTS.md, README.md, etc.), and existing Features/ directory to understand the current state
+     c. **Present a roadmap summary with recommendations** — show ALL active features with brief descriptions, note which ones have dependencies on others, which seem most impactful or foundational, and which already have steps defined. Recommend which feature to tackle next based on your investigation.
+     d. **Ask via AskUserQuestion** — include every non-✅ feature that doesn't have steps yet. If there are more than 4 features, present the top recommendations as options and note others are available via "Other"
    - If the feature has ✅ already, warn: "This feature is marked complete. Continue anyway?"
-3. **Optionally scan project source** — if helpful for understanding current architecture:
-   - Ask: "Should I scan your codebase to understand the current architecture before planning steps?"
-   - If yes, use Glob/Grep/Read to understand relevant code structure
-   - This helps create more accurate, contextual steps
+3. **Deep investigation** — after feature selection:
+   - Tell the user: "Let me investigate your codebase to understand the current architecture for [feature name]."
+   - Read relevant source files, data models, existing implementations, and any related documentation
+   - This is always done automatically for code features — no need to ask permission
 4. **Determine feature number**:
    - List existing entries in `Features/` directory
    - Find the highest 3-digit number and increment by 1
    - If empty, start at `001`
-5. **Plan the steps**:
-   - Analyze the feature's scope, decisions, and open questions from the roadmap
+5. **Discuss details and open questions** — before proposing any step breakdown:
+   - Present your investigation findings: what you found in the codebase, what's already implemented, what the current architecture looks like
+   - Review the roadmap feature's **Key decisions** and **Open questions** sections
+   - Identify the biggest uncertainties that affect step scope or content
+   - Discuss these with the user conversationally — ask questions grounded in specific findings (e.g., "I found X in your codebase, which means Y — does that match your intent?" NOT generic questions like "What framework do you prefer?")
+   - When referencing project files, always include the file path and a one-sentence description of what the file contains
+   - Cross-reference existing spec documents and project docs before asking questions that may already be answered
+   - Record the user's answers — they will be baked into the step files as requirements
+6. **Plan the steps**:
+   - Analyze the feature's scope, decisions (including from the discussion), and remaining open questions
    - Apply splitting guidelines:
      - **Design always separate from implementation**
      - **Content creation separate from code**
      - **One session ≈ one step** (completable in one focused working session)
      - **Small cross-repo changes can combine**
    - Determine: **single step** (→ just a file) or **multiple steps** (→ folder with step files)
-6. **Present the plan** — show the user the proposed step breakdown:
+7. **Present the plan** — show the proposed step breakdown using standard markdown (NOT decorative boxes — they constrain text width):
 
-   Display in chat:
    ```
-   ═══════════════════════════════════════════════════
-   📋 STEP BREAKDOWN — Feature Name
-   ═══════════════════════════════════════════════════
+   ## Step Breakdown — Feature Name
 
-   Feature: [name] from Roadmap [version]
-   Structure: [N] steps in folder [XXX-FeatureName/]
-   OR: Single step as [XXX-FeatureName.md]
+   **Feature:** [name] from Roadmap [version]
+   **Structure:** [N] steps in folder `XXX-FeatureName/`
 
-   Steps:
-   1. [Step name] — [brief description]
-   2. [Step name] — [brief description]
-   3. [Step name] — [brief description]
-
-   ═══════════════════════════════════════════════════
+   1. **Step name** — brief description
+   2. **Step name** — brief description
+   3. **Step name** — brief description
    ```
+
+   Tell the user: "After you approve this breakdown, I'll create requirement-focused step files with the details we discussed."
 
    Use AskUserQuestion:
    ```json
@@ -88,7 +95,7 @@ Determine file paths:
 
    If "Adjust" → discuss changes, then re-present.
 
-7. **Create the files**:
+8. **Create the files**:
    - **Single step**: create `Features/XXX-FeatureName.md` directly
    - **Multiple steps**: create `Features/XXX-FeatureName/` folder with `001-StepName.md`, `002-StepName.md`, etc.
    - Apply naming convention from `.config.json`
@@ -100,12 +107,13 @@ Determine file paths:
      - Content sections (Design before Implementation, always)
      - Checkboxes where tracking makes sense
    - Content is **requirements-level**: exact numbers, rules, conditions, behaviors — NOT code patterns or implementation details
-8. **Update Progress.md** — if Progress.md exists:
+9. **Update Progress.md** — if Progress.md exists:
    - Find the feature's `### heading` under the `## Current:` section
-   - Add a `Steps:` list with `[ ]` markers and file paths for each created step
+   - Add a `Steps:` list using this exact format per line: `- [ ] Step Name — \`Features/NNN-FeatureName/NNN-StepName.md\``
+   - File paths are relative to the PlanKit folder, wrapped in backticks (NOT markdown links)
    - If the feature section doesn't exist under Current, create it with `Status: Planned`
    - Update `Status:` to `In Progress` if any steps were created
-9. **Confirm** — show what was created and suggest starting with the first step
+10. **Confirm** — show what was created and suggest starting with the first step
 
 ## Step Completion
 
@@ -133,6 +141,8 @@ When the user wants to see their current steps:
 
 ## Important Rules
 
+- **Narrate your process** — before investigating, tell the user what you're about to do and why: "Let me review your roadmap and scan the codebase to understand the current state." After investigating, summarize what you found before asking questions. Users should never wonder what's happening or why they're being asked something.
+- **Ground questions in findings** — every question should reference something specific you found in the code, docs, or ideas. NOT "What framework should we use?" but "I see you're using SwiftData for persistence — should this feature also use SwiftData, or is there a reason to use a different approach?"
 - **Design before implementation** — every multi-step feature should have design steps before build steps
 - **Requirements, not code** — describe WHAT the code should do, not HOW to write it. Include exact numbers, rules, conditions, edge cases, UI descriptions. Do NOT include class names, struct definitions, function signatures, or architecture patterns.
 - **Preserve all links** — every URL from the roadmap feature carries into the relevant step files
