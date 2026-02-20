@@ -10,7 +10,7 @@ allowed-tools:
 disable-model-invocation: true
 ---
 
-# PlanKit Setup
+# Setup — First-time project initialization with migration
 
 You are initializing PlanKit for this project. Follow these steps exactly.
 

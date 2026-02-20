@@ -9,7 +9,7 @@ allowed-tools:
   - AskUserQuestion
 ---
 
-# Define Steps
+# Phase 3 — Break features into implementation steps
 
 If the user specified a feature name, pass it along when invoking the skill. Otherwise, the skill presents roadmap features to choose from.
 

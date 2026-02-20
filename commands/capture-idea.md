@@ -9,7 +9,7 @@ allowed-tools:
   - AskUserQuestion
 ---
 
-# Capture Idea
+# Phase 1 — Capture ideas and improvements
 
 If the user provided an idea alongside this command, pass it along when invoking the skill.
 

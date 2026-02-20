@@ -40,12 +40,29 @@ This is the primary workflow — turning ideas into a versioned roadmap:
    - Check git tags (`git tag --sort=-v:refname | head -5`)
    - Check package.json version field
    - If none found, ask the user what version they're planning
-4. **Determine target version** — if the user specified one, use it. Otherwise, suggest the next logical version and confirm.
-5. **Present ideas for triage** — show ideas grouped by theme. For each idea (or group of related ideas):
+4. **Investigate the codebase** — read AGENTS.md, CHECKPOINT.md, README.md, and other project docs to understand what's already implemented, what's changed, and what context is relevant to roadmap planning.
+
+### If the roadmap already has content (review + triage):
+
+5. **Present the current state** — show a summary: roadmap versions with feature counts, ideas grouped by theme with idea counts. Include observations from your codebase investigation (e.g., features that may already be implemented, items that are content tasks rather than code, ideas that relate to existing roadmap features).
+6. **Discuss and refine conversationally** — don't force rigid per-idea triage. Instead:
+   - Point out roadmap items that appear done, misplaced, or outdated
+   - Suggest structural improvements (version scope, ordering, merging small items)
+   - Ask about version scope and goals — what should each version represent?
+   - Use AskUserQuestion for concrete choices (e.g., "Should X move to v2.0?") but keep the overall flow conversational
+   - Ask targeted clarifying questions about the biggest unknowns (1-3 per feature)
+   - When designing AskUserQuestion options, prefer mixed/progressive options over exclusive ones (e.g., "All in priority order" not just one exclusive choice). Include scope-fluid options like "Try all, defer complex ones."
+   - **Always present the current version plan summary before asking about future versions or next priorities.** Never ask "what comes after vX?" without first showing what vX contains.
+7. **After review, offer to triage remaining ideas** — present untriaged ideas that weren't discussed yet. Ask which to pull into existing or new versions.
+
+### If the roadmap is empty (fresh triage):
+
+5. **Determine target version** — if the user specified one, use it. Otherwise, suggest the next logical version and confirm.
+6. **Present ideas for triage** — show ideas grouped by theme. For each idea (or group of related ideas):
    - Display the idea summary
    - Use AskUserQuestion: **Include in [version]** / **Skip (keep in ideas)** / **Discuss further**
    - If "Discuss further": ask clarifying questions about edge cases, technical direction, scope. These questions should focus on the BIGGEST unknowns — don't ask about trivia. Then re-ask include/skip.
-6. **For each included idea**:
+7. **For each included idea**:
    - Ask 1-3 targeted clarifying questions to resolve the biggest uncertainties. Focus on:
      - Edge cases that affect the feature's scope
      - Technical direction choices (which framework, which approach)
@@ -53,18 +70,22 @@ This is the primary workflow — turning ideas into a versioned roadmap:
    - Record answers as **Key decisions**
    - Note remaining unknowns as **Open questions**
    - Carry over ALL content from the idea: descriptions, links, examples, motivation
-7. **Extract included ideas from the Ideas file**:
+
+### After triage (both paths):
+
+8. **Extract included ideas from the Ideas file**:
    - **Single-file mode**: DELETE them from Ideas.md (they now live in the Roadmap)
    - **Split mode**: DELETE them from the appropriate topic file(s) under Ideas/. Update word counts in the index file. If a topic file becomes empty after extraction, delete it and remove its entry from the index file.
    - Ideas now live in the Roadmap — they must not exist in both places.
    - Note: each topic file contains exactly one theme, so ideas cannot span file boundaries. Identify which topic file(s) contain the selected ideas and extract from the correct file(s).
-8. **Write the version section** in the Roadmap file with all enriched features
-9. **Create or update Progress.md**:
-   - **If Progress.md doesn't exist**: create with `# Progress`, `## Current: vX.Y — Subtitle`, features as `Status: Planned` + `(No steps yet)`, and `## Released`
-   - **If Progress.md exists with matching version**: merge — preserve existing features with their current status and steps, add only NEW features as `Status: Planned` + `(No steps yet)`
-   - **If Progress.md exists with a DIFFERENT version**: warn the user that there's active progress on a different version. Use AskUserQuestion with options: "Release current version first" / "Replace current version" / "Cancel". If releasing, follow the dashboard skill's version release flow before proceeding. If replacing, move ALL existing Current features to Released (as-is, with today's date) before writing the new version — this prevents silent data loss.
-10. **Check word count** — auto-split if exceeds threshold
-11. **Summarize** — show what was added to the roadmap and what remains in ideas
+9. **Write the version section(s)** in the Roadmap file with all enriched features
+10. **MANDATORY — Create or update Progress.md** (do not skip this step, even when refining an existing roadmap):
+    - See [DASHBOARD_FORMAT.md](references/DASHBOARD_FORMAT.md) for the exact format specification.
+    - **If Progress.md doesn't exist**: create with `# Progress`, `## Current: vX.Y — Subtitle`, features as `Status: Planned` + `(No steps yet)`, and `## Released`
+    - **If Progress.md exists with matching version**: merge — preserve existing features with their current status and steps, add only NEW features as `Status: Planned` + `(No steps yet)`
+    - **If Progress.md exists with a DIFFERENT version**: warn the user that there's active progress on a different version. Use AskUserQuestion with options: "Release current version first" / "Replace current version" / "Cancel". If releasing, follow the dashboard skill's version release flow before proceeding. If replacing, move ALL existing Current features to Released (as-is, with today's date) before writing the new version — this prevents silent data loss.
+11. **Check word count** — auto-split if exceeds threshold
+12. **Summarize** — show what changed: features added/moved/removed, ideas remaining
 
 ## Version Management
 
@@ -82,13 +103,6 @@ When all features in a version have ✅ or user says the version shipped:
 3. Move any features WITHOUT ✅ to the next version section (create if needed), preserving all content
 4. **Update Progress.md**: move completed features to `## Released` as a brief entry (version + date + feature name bullets). Carry incomplete features to the next version's Current section.
 5. Offer to clean up completed feature files in `Features/` directory (with user confirmation)
-
-### Browse/Review Mode
-
-When the user wants to review the roadmap:
-1. Read the roadmap file(s)
-2. Present a clear summary: active versions with features, completed versions listed briefly
-3. Handle modifications conversationally (reorder, move between versions, remove, edit)
 
 ## Auto-Split Procedure
 

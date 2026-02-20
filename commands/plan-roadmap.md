@@ -9,7 +9,7 @@ allowed-tools:
   - AskUserQuestion
 ---
 
-# Plan Roadmap
+# Phase 2 — Triage ideas into a versioned roadmap
 
 If the user specified a version or context, pass it along when invoking the skill. Otherwise, the skill handles discovery.
 
