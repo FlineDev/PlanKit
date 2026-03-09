@@ -2,7 +2,9 @@
 
 **Ideas → Roadmap → Steps** — a planning plugin for [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 
-PlanKit is a 3-level planning system designed for indie and solo developers. It captures your project ideas, triages them into versioned roadmaps, and breaks features down into implementation-ready steps — all inside your project, all in Markdown.
+PlanKit is a 3-level planning system designed for indie and solo developers. It captures your project ideas, triages them into versioned roadmaps, and breaks features down into implementation-ready steps — all as markdown files that live in your project repository and can be committed alongside your code.
+
+> Everything stays in one place: your plans, your roadmap, and your code — all in the same repo.
 
 ## How It Works
 
@@ -14,13 +16,9 @@ PlanKit is a 3-level planning system designed for indie and solo developers. It 
 
 Content flows forward through the pipeline: **Ideas → Roadmap → Steps → Done**. Every link, example, and detail is preserved at each stage.
 
-## Getting Started
+## Installation
 
-### Installation
-
-**Via Marketplace (Recommended)**
-
-Start Claude Code (`claude`), then run these three commands inside it:
+Start Claude Code, then run:
 
 ```
 /plugin marketplace add FlineDev/Marketplace
@@ -34,24 +32,14 @@ Start Claude Code (`claude`), then run these three commands inside it:
 /plan-kit:init
 ```
 
-**Automatic Updates (Optional, Recommended)**
+PlanKit is part of the [FlineDev Marketplace](https://github.com/FlineDev/Marketplace) — see the full list of available plugins there.
 
-By default, third-party plugins don't auto-update. To receive new features and fixes automatically:
-
-1. Type `/plugin` and press Enter
-2. Switch to the **Marketplaces** tab
-3. Navigate to **FlineDev** and press Enter
-4. Press Enter on **Enable auto-update** (it flips to "Disable auto-update" when enabled)
-
-With this enabled, Claude Code checks for plugin updates on startup and notifies you when a new version is available.
-
-**Manual**
-
-```
-/plugin install https://github.com/FlineDev/PlanKit.git
-```
-
-Then run `/plan-kit:init` in your project directory.
+> [!TIP]
+> **Automatic Updates:** By default, third-party plugins don't auto-update. To receive new features and fixes automatically:
+> 1. Type `/plugin` and press Enter
+> 2. Switch to the **Marketplaces** tab
+> 3. Navigate to **FlineDev** and press Enter
+> 4. Press Enter on **Enable auto-update**
 
 ## Commands
 
@@ -61,8 +49,6 @@ Then run `/plan-kit:init` in your project directory.
 | `/plan-kit:capture-idea` | Capture a new idea (or brain-dump several) |
 | `/plan-kit:plan-roadmap` | Triage ideas into a versioned release plan |
 | `/plan-kit:define-steps` | Break a roadmap feature into implementation steps |
-
-## Natural Language
 
 You don't need to use commands explicitly. PlanKit's skills activate automatically when you discuss relevant topics:
 
