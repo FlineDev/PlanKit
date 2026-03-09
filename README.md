@@ -196,7 +196,3 @@ When Ideas or Roadmap files grow beyond 5,000 words (configurable in `.config.js
 - **Design before implementation** — thinking about design is always a separate step from coding
 - **Session-sized steps** — each step should be completable in one focused working session
 - **Always current** — freshness warnings remind you to check the codebase before implementing
-
-## License
-
-MIT
