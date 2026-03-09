@@ -1,4 +1,4 @@
-# PlanKit
+# 📋 PlanKit
 
 **Ideas → Roadmap → Steps** — a planning plugin for [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 
