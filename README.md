@@ -8,13 +8,23 @@ PlanKit is a 3-level planning system designed for indie and solo developers. It 
 
 ## How It Works
 
-| Level | What | Detail Level | Example |
-|-------|------|-------------|---------|
-| **Ideas** | Raw ideas, improvements, wishes | Problem + motivation + examples | "Visual streak calendar like GitHub contributions" |
-| **Roadmap** | Features grouped into versions | + Key decisions + open questions | "v2.0: Streak System — heatmap grid, 12-month scroll, freeze support" |
-| **Steps** | Implementation-ready task files | Full requirements, design-first | `001-DesignStreakCalendar.md` with data model, layout spec, edge cases |
+| Level | What | You provide | Claude does | Example |
+|-------|------|-------------|-------------|---------|
+| **Ideas** | Raw ideas, wishes, research | Describe what you want, share links | Organizes into themed groups, preserves every detail | [Ideas.md](examples/Ideas.md) |
+| **Roadmap** | Features grouped into versions | Answer clarifying questions, decide scope | Investigates codebase, proposes features, records decisions | [Roadmap.md](examples/Roadmap.md) |
+| **Steps** | Implementation-ready task files | Approve breakdown, discuss approach | Reads codebase, creates requirements-level step files | [001-DesignStreakCalendar.md](examples/001-DesignStreakCalendar.md) |
 
-Content flows forward through the pipeline: **Ideas → Roadmap → Steps → Done**. Every link, example, and detail is preserved at each stage.
+Content flows forward through the pipeline: **Ideas → Roadmap → Steps → Done**. Every link, example, and detail is preserved at each stage. A [Progress.md](examples/Progress.md) dashboard tracks the current state across all levels.
+
+## You Stay in Control
+
+PlanKit is collaborative, not autonomous. Claude guides the process but you make every important decision:
+
+- **Ideas**: Claude captures exactly what you say — no filtering, no judgment. You describe the idea, Claude organizes it.
+- **Roadmap**: Claude investigates your codebase first, then asks targeted questions grounded in what it found ("Your notification system already uses local notifications — should we build on that, or switch to push?"). You decide which ideas make it into which version, what the scope is, and how to resolve open questions.
+- **Steps**: Claude proposes a breakdown and discusses it with you before creating any files. You approve or adjust the plan. Step files describe *what* to build (requirements), not *how* to build it (code).
+
+At no point does Claude silently generate plans or make decisions for you. Every triage, scope decision, and step breakdown goes through a conversation first.
 
 ## Installation
 
@@ -77,9 +87,11 @@ PlanKit/
 
 The naming convention is auto-detected during `/plan-kit:init` — Swift/Apple projects get UpperCamelCase (shown above), while JS/web projects get kebab-case (`plan-kit/`, `ideas.md`, etc.). The convention is stored in `.config.json`.
 
-## Detail Levels — A Concrete Example
+## What the Files Look Like
 
-### Level 1: Idea
+All examples below are from a fictional **HabitTracker** app — the same files linked in the table above.
+
+### Ideas — themed groups of raw ideas
 
 ```markdown
 ## Streaks & Motivation
@@ -90,16 +102,14 @@ A visual calendar (like GitHub's contribution graph) could provide
 "don't break the chain" motivation.
 
 See [Streaks app](https://streaksapp.com) for a minimal approach.
-
-Possible approaches:
-- Heatmap grid (intensity = habits completed)
-- Simple chain dots (connected when streak continues)
 ```
 
-### Level 2: Roadmap Feature
+Ideas are organized by theme (H2) with detailed entries (H3) and brief bullets. Nothing is filtered or summarized — your exact words, links, and research are preserved. → [Full example](examples/Ideas.md)
+
+### Roadmap — versioned features with decisions
 
 ```markdown
-## v2.0 — Streaks & Social
+## v2.0 — Streaks & Motivation
 
 ### Streak System
 
@@ -108,46 +118,69 @@ Visual streak tracking with a GitHub-style heatmap calendar...
 **Key decisions:**
 - Heatmap grid, not chain dots (richer data, more satisfying)
 - Intensity = percentage of daily habits completed
-- Show 12 months of history, scrollable
+- 12-month scrollable view, current month anchored to the right
 
 **Open questions:**
-- Should partial completion count as a streak day?
+- Should partial completion count as maintaining the streak?
 ```
 
-### Level 3: Implementation Step
+Each feature carries its full context from the idea, enriched with **Key decisions** (what you decided during the triage conversation) and **Open questions** (what's still unresolved). → [Full example](examples/Roadmap.md)
+
+### Steps — requirements-level implementation files
 
 ```markdown
 # Design Streak Calendar
 
-Feature: Streak System (from Roadmap v2.0 — Streaks & Social)
+Feature: Streak System (from Roadmap v2.0 — Streaks & Motivation)
 
 ⚠️ Created 2026-02-19. Review current codebase before implementing.
 
 ## Heatmap Calendar Layout
 
-12-month scrollable view, current month on the right. Grid: 7 rows
-(days of week) × ~52 columns (weeks).
+12-month scrollable view, current month anchored to the right.
+Grid layout: 7 rows (days of week) × ~52 columns (weeks).
 
-Color intensity based on completion percentage:
-- 0% = empty (no color)
-- 1-49% = light shade
-- 50-99% = medium shade
-- 100% = full intensity
+Color intensity based on daily completion percentage:
+- 0% = empty cell (background color)
+- 1–49% = light shade
+- 50–99% = medium shade
+- 100% = full intensity (accent color)
 ```
 
-Each level adds more specificity. Ideas capture the "what if", the roadmap adds "what exactly", and steps define "how specifically".
+Steps describe *what* to build — data models, layouts, interactions, edge cases — not *how* to code it. Each step includes a freshness warning (creation date) reminding you to check the current codebase before implementing. → [Full example](examples/001-DesignStreakCalendar.md)
+
+### Progress — automatic dashboard
+
+```markdown
+## Current: v2.0 — Streaks & Motivation
+
+### Streak System
+Status: In Progress
+
+Steps:
+- [x] Design Streak Calendar — `Features/001-StreakSystem/001-DesignStreakCalendar.md`
+- [>] Implement Streak Logic — `Features/001-StreakSystem/002-ImplementStreakLogic.md`
+- [ ] Validate Edge Cases — `Features/001-StreakSystem/003-ValidateEdgeCases.md`
+```
+
+Progress.md updates automatically as you work. Status markers: `[ ]` not started, `[>]` in progress, `[x]` done. → [Full example](examples/Progress.md)
 
 ## Lifecycle
 
-The dashboard (Progress.md) updates automatically throughout all stages — no separate command needed.
+### Ideas → Roadmap (Triage)
 
-### Ideas → Roadmap (Extraction)
-When an idea is selected for the roadmap during `/plan-kit:plan-roadmap`, it is **moved** (not copied) from the Ideas file to the Roadmap. All content is preserved and enriched with key decisions from the triage conversation. Progress.md is created with the new version and its features.
+When you run `/plan-kit:plan-roadmap`, Claude reads your ideas, investigates the codebase, and walks you through each idea: include in this version, skip, or discuss further? For each included feature, Claude asks 1–3 clarifying questions based on what it found in your code — then records the answers as **Key decisions**. Selected ideas are **moved** (not copied) from Ideas to the Roadmap.
+
+### Roadmap → Steps (Breakdown)
+
+When you run `/plan-kit:define-steps`, Claude reads the roadmap feature, investigates relevant code, and proposes a step breakdown. You discuss and approve before any files are created. Each step is designed to be completable in one focused session, with design always as a separate step before implementation.
 
 ### Steps → Completion
-When a step is done, PlanKit suggests deleting the step file and updates Progress.md. When all steps for a feature are complete, the feature folder is cleaned up and the roadmap feature is marked with a checkmark.
+
+When you tell Claude a step is done, it updates Progress.md and suggests deleting the step file. When all steps for a feature are complete, the feature folder is cleaned up and the roadmap feature is marked with a checkmark.
 
 ### Version Release
+
 When a version ships, completed features are slimmed to just names in both the Roadmap and Progress.md. Any unfinished features carry over to the next version automatically.
 
 ## Auto-Split
