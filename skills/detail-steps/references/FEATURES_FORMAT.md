@@ -4,22 +4,38 @@
 
 ```
 PlanKit/Features/               (or plan-kit/features/)
-├── 001-FeatureName/            Single feature with multiple steps
-│   ├── 001-StepName.md
-│   ├── 002-AnotherStep.md
-│   └── 003-FinalStep.md
-├── 002-SimpleFeature.md        Single-step feature (just a file)
-└── 003-AnotherFeature/         Another multi-step feature
-    ├── 001-DesignPhase.md
-    └── 002-BuildPhase.md
+├── 005-StreakSystem/            Feature with multiple steps
+│   ├── A-DesignStreakCalendar.md
+│   ├── B-ImplementStreakLogic.md
+│   └── C-ValidateEdgeCases.md
+├── 006-SmartReminders.md       Single-step feature (just a file)
+└── 007-StreakMilestones/       Another multi-step feature
+    ├── A-DesignMilestones.md
+    └── B-BuildMilestones.md
 ```
 
 ## Numbering
 
-- **Features**: 3-digit sequential numbers: `001`, `002`, `003`, ...
-- **Steps within features**: 3-digit sequential: `001`, `002`, `003`, ...
-- Numbers are assigned in order of creation, NOT priority
-- Gaps are fine (if 002 is deleted, don't renumber)
+### Features: Global 3-digit counter
+
+- Read `nextFeatureNumber` from `.config.json`, use it, increment, write back
+- Numbers are **globally unique** — never reused, even after a feature is deleted
+- Format: 3-digit zero-padded (`001`, `002`, ..., `999`)
+- This ensures references like `005/A` remain unambiguous forever
+
+### Steps: Alphabet letters (A–Z)
+
+- Steps within a feature use uppercase letters: `A-`, `B-`, `C-`, ...
+- Letters are assigned in order of creation, NOT priority
+- Maximum 26 steps per feature — if more are needed, split the feature
+- Gaps are fine (if B is deleted, A and C remain — no re-lettering)
+
+### Cross-referencing
+
+Use `NNN/X` format to reference a specific step:
+- `005/A` = feature 005, step A
+- `005/C` = feature 005, step C
+- `005` alone refers to the feature as a whole
 
 ## Naming Convention
 
@@ -27,8 +43,8 @@ Follows `.config.json` naming setting:
 
 | Convention | Feature Folder | Step File |
 |-----------|---------------|-----------|
-| UpperCamelCase | `001-StreakSystem/` | `001-DesignStreakCalendar.md` |
-| kebab-case | `001-streak-system/` | `001-design-streak-calendar.md` |
+| UpperCamelCase | `005-StreakSystem/` | `A-DesignStreakCalendar.md` |
+| kebab-case | `005-streak-system/` | `a-design-streak-calendar.md` |
 
 ## Single-Step Feature Format
 
@@ -108,16 +124,19 @@ When breaking a feature into steps, follow these principles:
 2. **Content creation separate from code** — writing copy, preparing assets = separate step
 3. **One session ≈ one step** — each step should be completable in roughly one working session
 4. **Small cross-repo changes can combine** — if a step touches 2-3 files in different places, that's fine
-5. **Dependencies flow forward** — step 002 can depend on 001, never the reverse
+5. **Dependencies flow forward** — step B can depend on A, never the reverse
+6. **Maximum 26 steps** — if a feature needs more, split it into multiple features
 
 ## Lifecycle
 
 ### Step Completion
 When a step is fully done:
-- Suggest deleting the step file
+- Suggest deleting the step file (tip: commit to git first)
 - If user confirms → delete the file
+- Load the `done` skill and follow **Scenario 1: Step Completed** to archive it
 - If ALL steps in a feature folder are done → offer to delete the entire folder
 - Mark the corresponding roadmap feature with ✅
+- Load the `done` skill and follow **Scenario 2: Feature Completed**
 
 ### Incomplete Aspects
 If aspects are discovered during implementation that weren't planned:

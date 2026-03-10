@@ -114,7 +114,8 @@ plan-kit/
 {
   "naming": "[UpperCamelCase or kebab-case]",
   "created": "[today's date YYYY-MM-DD]",
-  "splitThreshold": 5000
+  "splitThreshold": 5000,
+  "nextFeatureNumber": 1
 }
 ```
 

@@ -44,9 +44,10 @@ Determine file paths:
    - Read relevant source files, data models, existing implementations, and any related documentation
    - This is always done automatically for code features — no need to ask permission
 4. **Determine feature number**:
-   - List existing entries in `Features/` directory
-   - Find the highest 3-digit number and increment by 1
-   - If empty, start at `001`
+   - Read `nextFeatureNumber` from `.config.json`
+   - Use that number (zero-padded to 3 digits) for this feature
+   - Increment `nextFeatureNumber` in `.config.json` and write it back
+   - This ensures globally unique feature numbers that are never reused
 5. **Discuss details and open questions** — before proposing any step breakdown:
    - Present your investigation findings: what you found in the codebase, what's already implemented, what the current architecture looks like
    - Review the roadmap feature's **Key decisions** and **Open questions** sections
@@ -97,7 +98,7 @@ Determine file paths:
 
 8. **Create the files**:
    - **Single step**: create `Features/XXX-FeatureName.md` directly
-   - **Multiple steps**: create `Features/XXX-FeatureName/` folder with `001-StepName.md`, `002-StepName.md`, etc.
+   - **Multiple steps**: create `Features/XXX-FeatureName/` folder with `A-StepName.md`, `B-StepName.md`, etc.
    - Apply naming convention from `.config.json`
    - Each file includes:
      - H1 = step/feature name
@@ -109,7 +110,7 @@ Determine file paths:
    - Content is **requirements-level**: exact numbers, rules, conditions, behaviors — NOT code patterns or implementation details
 9. **Update Progress.md** — if Progress.md exists:
    - Find the feature's `### heading` under the `## Current:` section
-   - Add a `Steps:` list using this exact format per line: `- [ ] Step Name — \`Features/NNN-FeatureName/NNN-StepName.md\``
+   - Add a `Steps:` list using this exact format per line: `- [ ] Step Name — \`Features/NNN-FeatureName/X-StepName.md\`` (where X is the step letter)
    - File paths are relative to the PlanKit folder, wrapped in backticks (NOT markdown links)
    - If the feature section doesn't exist under Current, create it with `Status: Planned`
    - Update `Status:` to `In Progress` if any steps were created
@@ -120,13 +121,20 @@ Determine file paths:
 When the user indicates a step is done (or you notice from conversation), update Progress.md directly here. The dashboard skill also derives feature status from step markers, but explicit updates during interactive workflows ensure accuracy.
 
 1. Ask: "Step [name] is complete. Should I delete the step file?"
-2. If confirmed → delete the step file (tip: suggest committing to git first so content is recoverable via `git show`)
+2. If confirmed:
+   a. **Commit the step file deletion** to git (suggest committing first so content is in history)
+   b. Delete the step file
+   c. **Archive to Done.md** — load the `done` skill and follow its **Scenario 1: Step Completed** instructions. Pass the step name, feature name/number, and file path.
 3. **Update Progress.md** — change the step's marker from `[ ]` or `[>]` to `[x]`
 4. Check if ALL steps in the feature folder are now done:
    - If yes → update Progress.md: set feature `Status: Done`
    - Ask: "All steps for [Feature] are complete. Delete the feature folder and mark it ✅ on the roadmap?"
    - If confirmed → delete folder, add ✅ to roadmap feature heading
-5. If aspects were incomplete or newly discovered:
+   - **Archive to Done.md** — load the `done` skill and follow its **Scenario 2: Feature Completed** instructions
+5. If a step is **dropped** (started but abandoned):
+   - Delete the step file (commit first)
+   - **Archive to Done.md** — load the `done` skill and follow its **Scenario 1: Step Completed** instructions, using the 🛑 marker and including the reason
+6. If aspects were incomplete or newly discovered:
    - Offer to add them to another step file
    - Or note in the roadmap feature as needing follow-up
    - Or capture as a new idea via the capture-ideas skill
@@ -148,7 +156,7 @@ When the user wants to see their current steps:
 - **Preserve all links** — every URL from the roadmap feature carries into the relevant step files
 - **Freshness warning** — always include creation date so future sessions know to check current state
 - **Session-sized** — each step should feel like "I can finish this in one sitting"
-- **No renumbering** — if step 002 is deleted, steps 001 and 003 remain. Gaps are fine.
+- **No re-lettering** — if step B is deleted, steps A and C remain. Gaps are fine.
 
 ## Format Reference
 

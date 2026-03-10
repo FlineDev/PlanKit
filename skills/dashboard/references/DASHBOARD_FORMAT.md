@@ -11,9 +11,9 @@
 Status: In Progress
 
 Steps:
-- [x] Design Streak Calendar — `Features/001-StreakSystem/001-DesignStreakCalendar.md`
-- [>] Implement Streak Logic — `Features/001-StreakSystem/002-ImplementStreakLogic.md`
-- [ ] Validate Edge Cases — `Features/001-StreakSystem/003-ValidateEdgeCases.md`
+- [x] Design Streak Calendar — `Features/005-StreakSystem/A-DesignStreakCalendar.md`
+- [>] Implement Streak Logic — `Features/005-StreakSystem/B-ImplementStreakLogic.md`
+- [ ] Validate Edge Cases — `Features/005-StreakSystem/C-ValidateEdgeCases.md`
 
 ### Another Feature
 Status: Planned
@@ -24,7 +24,7 @@ Status: Planned
 Status: Done
 
 Steps:
-- [x] Fix Login Button — `Features/002-SmartReminders.md`
+- [x] Fix Login Button — `Features/006-SmartReminders.md`
 
 ---
 
@@ -60,11 +60,12 @@ Steps:
 ## Step Line Format
 
 ```
-- [marker] Step Name — `Features/NNN-FeatureName/NNN-StepName.md`
+- [marker] Step Name — `Features/NNN-FeatureName/X-StepName.md`
 ```
 
 - Step name matches the H1 of the step file
 - File path is relative to the PlanKit folder, in backticks
+- `NNN` = 3-digit global feature number, `X` = step letter (A-Z)
 - Single-step features use the file path directly: `Features/NNN-FeatureName.md`
 
 ## Feature Status Rules

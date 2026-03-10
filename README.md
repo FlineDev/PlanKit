@@ -1,6 +1,6 @@
 # 📋 PlanKit
 
-**Ideas → Roadmap → Steps** — a planning plugin for [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
+**Ideas → Roadmap → Steps → Done** — a planning plugin for [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 
 PlanKit is a 3-level planning system designed for indie and solo developers. It captures your project ideas, triages them into versioned roadmaps, and breaks features down into implementation-ready steps — all as markdown files that live in your project repository and can be committed alongside your code.
 
@@ -12,7 +12,8 @@ PlanKit is a 3-level planning system designed for indie and solo developers. It 
 |-------|------|-------------|-------------|---------|
 | **Ideas** | Raw ideas, wishes, research | Describe what you want, share links | Organizes into themed groups, preserves every detail | [Ideas.md](examples/Ideas.md) |
 | **Roadmap** | Features grouped into versions | Answer clarifying questions, decide scope | Investigates codebase, proposes features, records decisions | [Roadmap.md](examples/Roadmap.md) |
-| **Steps** | Implementation-ready task files | Approve breakdown, discuss approach | Reads codebase, creates requirements-level step files | [001-DesignStreakCalendar.md](examples/001-DesignStreakCalendar.md) |
+| **Steps** | Implementation-ready task files | Approve breakdown, discuss approach | Reads codebase, creates requirements-level step files | [A-DesignStreakCalendar.md](examples/A-DesignStreakCalendar.md) |
+| **Done** | Archive of completed work | Confirm completion, provide reasons for skips | Records status, git SHAs for recovery, PR references | [Done.md](examples/Done.md) |
 
 Content flows forward through the pipeline: **Ideas → Roadmap → Steps → Done**. Every link, example, and detail is preserved at each stage. A [Progress.md](examples/Progress.md) dashboard tracks the current state across all levels.
 
@@ -23,6 +24,7 @@ PlanKit is collaborative, not autonomous. Claude guides the process but you make
 - **Ideas**: Claude captures exactly what you say — no filtering, no judgment. You describe the idea, Claude organizes it.
 - **Roadmap**: Claude investigates your codebase first, then asks targeted questions grounded in what it found ("Your notification system already uses local notifications — should we build on that, or switch to push?"). You decide which ideas make it into which version, what the scope is, and how to resolve open questions.
 - **Steps**: Claude proposes a breakdown and discusses it with you before creating any files. You approve or adjust the plan. Step files describe *what* to build (requirements), not *how* to build it (code).
+- **Skipping & Dropping**: You decide when to skip a feature (never started) or drop one (started but abandoned). Claude records the reason in Done.md so the context isn't lost.
 
 At no point does Claude silently generate plans or make decisions for you. Every triage, scope decision, and step breakdown goes through a conversation first.
 
@@ -77,13 +79,16 @@ PlanKit/
 ├── Ideas.md
 ├── Roadmap.md
 ├── Progress.md          ← created when first version is planned
+├── Done.md              ← created when first work is completed
 └── Features/
-    ├── 001-StreakSystem/
-    │   ├── 001-DesignStreakCalendar.md
-    │   ├── 002-ImplementStreakLogic.md
-    │   └── 003-ValidateEdgeCases.md
-    └── 002-SmartReminders.md
+    ├── 005-StreakSystem/
+    │   ├── A-DesignStreakCalendar.md
+    │   ├── B-ImplementStreakLogic.md
+    │   └── C-ValidateEdgeCases.md
+    └── 006-SmartReminders.md
 ```
+
+Features use globally unique 3-digit numbers (never reused, even after deletion). Steps use letters (A–Z). This creates clean cross-references like `005/A`.
 
 The naming convention is auto-detected during `/plan-kit:init` — Swift/Apple projects get UpperCamelCase (shown above), while JS/web projects get kebab-case (`plan-kit/`, `ideas.md`, etc.). The convention is stored in `.config.json`.
 
@@ -147,7 +152,7 @@ Color intensity based on daily completion percentage:
 - 100% = full intensity (accent color)
 ```
 
-Steps describe *what* to build — data models, layouts, interactions, edge cases — not *how* to code it. Each step includes a freshness warning (creation date) reminding you to check the current codebase before implementing. → [Full example](examples/001-DesignStreakCalendar.md)
+Steps describe *what* to build — data models, layouts, interactions, edge cases — not *how* to code it. Each step includes a freshness warning (creation date) reminding you to check the current codebase before implementing. → [Full example](examples/A-DesignStreakCalendar.md)
 
 ### Progress — automatic dashboard
 
@@ -158,12 +163,31 @@ Steps describe *what* to build — data models, layouts, interactions, edge case
 Status: In Progress
 
 Steps:
-- [x] Design Streak Calendar — `Features/001-StreakSystem/001-DesignStreakCalendar.md`
-- [>] Implement Streak Logic — `Features/001-StreakSystem/002-ImplementStreakLogic.md`
-- [ ] Validate Edge Cases — `Features/001-StreakSystem/003-ValidateEdgeCases.md`
+- [x] Design Streak Calendar — `Features/005-StreakSystem/A-DesignStreakCalendar.md`
+- [>] Implement Streak Logic — `Features/005-StreakSystem/B-ImplementStreakLogic.md`
+- [ ] Validate Edge Cases — `Features/005-StreakSystem/C-ValidateEdgeCases.md`
 ```
 
 Progress.md updates automatically as you work. Status markers: `[ ]` not started, `[>]` in progress, `[x]` done. → [Full example](examples/Progress.md)
+
+### Done — archive of completed work
+
+```markdown
+## v1.0 — Core Habits (2025-09-01 → 2026-01-15)
+
+### ✅ 001-HabitCreation
+
+Create, edit, and delete custom habits with name, icon, and frequency.
+
+- ✅ A-DesignHabitModel · plan: `e3f4a5b`
+- ✅ B-BuildCreationFlow · plan: `c6d7e8f` · PR #3
+
+### ⏭️ 004-HabitReminders
+
+Descoped — notification framework not ready. Moved to v2.0 ideas.
+```
+
+When features or steps are completed (✅), skipped (⏭️), or dropped (🛑), they're archived in Done.md with git commit SHAs for full recovery. `plan:` SHAs point to the deletion commit — `git show <sha>` recovers the complete step file. → [Full example](examples/Done.md)
 
 ## Lifecycle
 
@@ -175,13 +199,15 @@ When you run `/plan-kit:plan-roadmap`, Claude reads your ideas, investigates the
 
 When you run `/plan-kit:define-steps`, Claude reads the roadmap feature, investigates relevant code, and proposes a step breakdown. You discuss and approve before any files are created. Each step is designed to be completable in one focused session, with design always as a separate step before implementation.
 
-### Steps → Completion
+### Steps → Done (Completion)
 
-When you tell Claude a step is done, it updates Progress.md and suggests deleting the step file. When all steps for a feature are complete, the feature folder is cleaned up and the roadmap feature is marked with a checkmark.
+When you tell Claude a step is done, it commits and deletes the step file, updates Progress.md, and archives the entry to Done.md with the deletion commit SHA. When all steps for a feature are complete, the feature folder is cleaned up, the roadmap feature is marked ✅, and the feature entry in Done.md gets its final status.
+
+Features can also be **skipped** (⏭️ — decided not to build) or **dropped** (🛑 — started but abandoned). Both are recorded in Done.md with the reason, so the context isn't lost.
 
 ### Version Release
 
-When a version ships, completed features are slimmed to just names in both the Roadmap and Progress.md. Any unfinished features carry over to the next version automatically.
+When a version ships, completed features are slimmed to just names in both the Roadmap and Progress.md. Done.md gets the version's end date filled in. Any unfinished features carry over to the next version automatically.
 
 ## Auto-Split
 
@@ -196,3 +222,4 @@ When Ideas or Roadmap files grow beyond 5,000 words (configurable in `.config.js
 - **Design before implementation** — thinking about design is always a separate step from coding
 - **Session-sized steps** — each step should be completable in one focused working session
 - **Always current** — freshness warnings remind you to check the codebase before implementing
+- **Nothing is lost** — completed work is archived in Done.md with git SHAs for full recovery

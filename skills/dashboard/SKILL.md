@@ -93,16 +93,18 @@ When all features are Done or user says the version shipped:
    - Any features with `Status: Planned` or `Status: In Progress` → carry over to a new `## Current:` section for the next version
    - Use AskUserQuestion to confirm the next version number
 4. **Write updated Progress.md**
-5. **Confirm** what was released and what carries over
+5. **Archive to Done.md** — load the `done` skill and follow its **Scenario 4: Version Released** instructions
+6. **Confirm** what was released and what carries over
 
 ## Recover Deleted Step Content
 
 When a step file has been deleted but the user needs its content:
 
-1. **Find the file path** from the Progress.md step line (in backticks)
-2. **Use git to recover**: `git log --all --full-history -- "path/to/file"` then `git show <commit>:path/to/file`
-3. **Display the content** to the user
-4. **Offer to recreate** the file if needed
+1. **Check Done.md first** — look for the step's `plan:` SHA reference. If found, use it directly: `git show <sha>~1:path/to/file`
+2. **Fallback to git search**: `git log --all --full-history -- "path/to/file"` then `git show <commit>:path/to/file`
+3. **Find the file path** from the Progress.md step line (in backticks) or Done.md step line
+4. **Display the content** to the user
+5. **Offer to recreate** the file if needed
 
 ## Important Rules
 

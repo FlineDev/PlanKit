@@ -109,6 +109,13 @@ When all features in a version have ✅ or user says the version shipped:
 3. Move any features WITHOUT ✅ to the next version section (create if needed), preserving all content
 4. **Update Progress.md**: move completed features to `## Released` as a brief entry (version + date + feature name bullets). Carry incomplete features to the next version's Current section.
 5. Offer to clean up completed feature files in `Features/` directory (with user confirmation)
+6. **Archive to Done.md** — load the `done` skill and follow its **Scenario 4: Version Released** instructions. Pass the version number, subtitle, release date, and list of features with their final statuses.
+
+### Feature Skipped or Dropped
+
+When a feature is removed from the roadmap during triage (descoped, deferred indefinitely, or abandoned):
+1. Remove the feature from the Roadmap
+2. **Archive to Done.md** — load the `done` skill and follow its **Scenario 3: Feature Skipped or Dropped** instructions. Pass the feature name, number (if it had one), version, status (⏭️ skipped or 🛑 dropped), and the reason.
 
 ## Auto-Split Procedure
 
