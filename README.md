@@ -44,7 +44,7 @@ Start Claude Code, then run:
 /plan-kit:init
 ```
 
-PlanKit is part of the [FlineDev Marketplace](https://github.com/FlineDev/Marketplace) — see the full list of available plugins there.
+If you're in an active session, run `/reload-plugins` to activate immediately. PlanKit is part of the [FlineDev Marketplace](https://github.com/FlineDev/Marketplace) — see the full list of available plugins there.
 
 > [!TIP]
 > **Automatic Updates:** By default, third-party plugins don't auto-update. To receive new features and fixes:
