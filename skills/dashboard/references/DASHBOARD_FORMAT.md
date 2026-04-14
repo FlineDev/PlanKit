@@ -114,7 +114,7 @@ When a version ships but some features are incomplete:
 
 ## Creation
 
-Progress.md is created **lazily** by the plan-roadmap skill when the first version is planned. Initial content:
+Progress.md is created **lazily** by the roadmap-planning skill when the first version is planned. Initial content:
 
 ```markdown
 # Progress

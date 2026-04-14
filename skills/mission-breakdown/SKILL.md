@@ -1,16 +1,17 @@
 ---
-name: detail-missions
+name: mission-breakdown
 description: >
   Break down a roadmap feature into detailed implementation missions. Use
   when the user wants to plan how to implement a feature, create tasks, or
   break down a milestone into work items. Generates requirement-focused
   missions with design always separate from implementation. Keywords:
-  missions, mission, break down, implementation plan, tasks, how to build,
-  plan feature, work breakdown, mission by mission, detail feature, let's
-  implement, start building, plan implementation, what are the missions.
+  missions, mission, mission breakdown, break down, implementation plan,
+  tasks, how to build, plan feature, work breakdown, mission by mission,
+  detail feature, let's implement, start building, plan implementation,
+  what are the missions.
 ---
 
-# Detail Missions
+# Mission Breakdown
 
 Break down roadmap features into implementation missions — requirement-focused, session-sized, design before code.
 
@@ -19,7 +20,7 @@ Break down roadmap features into implementation missions — requirement-focused
 Before any operation, locate the PlanKit folder and read its config:
 
 1. Check if `PlanKit/` exists in the project root. If not, check `plan-kit/`.
-2. If neither exists, tell the user: "No PlanKit folder found. Run `/plan-kit:init` to set up PlanKit first."
+2. If neither exists, tell the user: "No PlanKit folder found. Run `/plankit:init` to set up PlanKit first."
 3. Read `.config.json` from the PlanKit folder to get the naming convention.
 
 Determine file paths:
@@ -146,7 +147,7 @@ When the user indicates a mission is done (or you notice from conversation), upd
 6. If aspects were incomplete or newly discovered:
    - Offer to add them to another mission file
    - Or note in the roadmap feature as needing follow-up
-   - Or capture as a new idea via the capture-ideas skill
+   - Or capture as a new idea via the idea-dump skill
 
 ## Browse/Review Mode
 

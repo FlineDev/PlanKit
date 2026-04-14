@@ -203,9 +203,9 @@ Before asking the user, proactively search for existing planning documents:
      - Version plans/milestones/roadmaps → Roadmap.md
      - Detailed feature plans with implementation missions → Features/ directory
    - **Load the relevant PlanKit skills** to ensure correct formatting:
-     - If migrating ideas → read the `capture-ideas` skill and its format reference (IDEAS_FORMAT.md) before writing Ideas.md
-     - If migrating a roadmap → read the `plan-roadmap` skill and its format reference (ROADMAP_FORMAT.md) before writing Roadmap.md
-     - If migrating feature plans → read the `detail-missions` skill and its format reference (FEATURES_FORMAT.md) before writing to Features/
+     - If migrating ideas → read the `idea-dump` skill and its format reference (IDEAS_FORMAT.md) before writing Ideas.md
+     - If migrating a roadmap → read the `roadmap-planning` skill and its format reference (ROADMAP_FORMAT.md) before writing Roadmap.md
+     - If migrating feature plans → read the `mission-breakdown` skill and its format reference (FEATURES_FORMAT.md) before writing to Features/
    - **Migrate Roadmap first** (if any source contains versioned/prioritized features):
      - Convert to PlanKit roadmap format: each feature group becomes a `### Feature Name` section with description paragraph
      - Checkbox items become descriptive content — do NOT preserve checkbox format
@@ -238,7 +238,7 @@ Before asking the user, proactively search for existing planning documents:
 
 ## Step 5: Ask About Immediate Ideas
 
-Before proceeding, read the `capture-ideas` skill instructions and its format reference (IDEAS_FORMAT.md) so you know the correct format for writing to Ideas.md.
+Before proceeding, read the `idea-dump` skill instructions and its format reference (IDEAS_FORMAT.md) so you know the correct format for writing to Ideas.md.
 
 ```json
 {
@@ -247,7 +247,7 @@ Before proceeding, read the `capture-ideas` skill instructions and its format re
     "header": "Ideas",
     "options": [
       {"label": "Yes, let me share", "description": "Brain-dump some ideas interactively"},
-      {"label": "No, later", "description": "I'll add ideas later with /plan-kit:capture-idea"}
+      {"label": "No, later", "description": "I'll add ideas later with /plankit:idea-dump"}
     ],
     "multiSelect": false
   }]
@@ -278,9 +278,9 @@ Migrated:
 
 📋 Commands (in workflow order):
 
-1. /plan-kit:capture-idea  — Capture ideas anytime
-2. /plan-kit:plan-roadmap  — Plan your next version
-3. /plan-kit:define-missions  — Break features into session-sized missions
+1. /plankit:idea-dump          — Capture ideas anytime
+2. /plankit:roadmap-planning   — Plan your next version
+3. /plankit:mission-breakdown  — Break features into session-sized missions
 
 Or just talk naturally — PlanKit picks up on
 planning-related conversations automatically.

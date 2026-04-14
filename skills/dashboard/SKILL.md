@@ -16,14 +16,14 @@ description: >
 
 Automatic project dashboard — tracks feature progress, mission completion, and version releases via Progress.md.
 
-This skill has **no command**. It triggers automatically when the user discusses status, completion, or releases. Other PlanKit skills (plan-roadmap, detail-missions) also update Progress.md directly as part of their workflows.
+This skill has **no command**. It triggers automatically when the user discusses status, completion, or releases. Other PlanKit skills (roadmap-planning, mission-breakdown) also update Progress.md directly as part of their workflows.
 
 ## Config Preamble
 
 Before any operation, locate the PlanKit folder and read its config:
 
 1. Check if `PlanKit/` exists in the project root. If not, check `plan-kit/`.
-2. If neither exists, tell the user: "No PlanKit folder found. Run `/plan-kit:init` to set up PlanKit first."
+2. If neither exists, tell the user: "No PlanKit folder found. Run `/plankit:init` to set up PlanKit first."
 3. Read `.config.json` from the PlanKit folder to get the naming convention.
 
 Determine file paths:
@@ -36,7 +36,7 @@ Determine file paths:
 
 When the user asks about status/progress:
 
-1. **Read Progress.md** — if it doesn't exist, tell the user: "No Progress.md yet. It's created when you plan your first version with `/plan-kit:plan-roadmap`."
+1. **Read Progress.md** — if it doesn't exist, tell the user: "No Progress.md yet. It's created when you plan your first version with `/plankit:roadmap-planning`."
 2. **Display a visual summary** in chat:
 
    ```
@@ -114,7 +114,7 @@ When a mission file has been deleted but the user needs its content:
 - **File paths on every mission line** — preserved in backticks for git recovery after deletion
 - **Feature status derives from missions** — `Planned` (no missions or all `[ ]`), `In Progress` (any `[>]` or mix of `[x]`/`[ ]`), `Done` (all `[x]`)
 - **Released section is slim** — just version + date + feature name bullets, no mission details
-- **Progress.md is created lazily** — by the plan-roadmap skill when a version is first planned
+- **Progress.md is created lazily** — by the roadmap-planning skill when a version is first planned
 
 ## Format Reference
 

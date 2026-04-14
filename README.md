@@ -37,11 +37,11 @@ Start Claude Code, then run:
 ```
 
 ```
-/plugin install plan-kit
+/plugin install plankit
 ```
 
 ```
-/plan-kit:init
+/plankit:init
 ```
 
 If you're in an active session, run `/reload-plugins` to activate immediately. PlanKit is part of the [FlineDev Marketplace](https://github.com/FlineDev/Marketplace) — see the full list of available plugins there.
@@ -57,10 +57,10 @@ If you're in an active session, run `/reload-plugins` to activate immediately. P
 
 | Command | Purpose |
 |---------|---------|
-| `/plan-kit:init` | First-time setup, convention detection, migration |
-| `/plan-kit:capture-idea` | Capture a new idea (or brain-dump several) |
-| `/plan-kit:plan-roadmap` | Triage ideas into a versioned release plan |
-| `/plan-kit:define-missions` | Break a roadmap feature into implementation missions |
+| `/plankit:init` | First-time setup, convention detection, migration |
+| `/plankit:idea-dump` | Capture a new idea (or brain-dump several) |
+| `/plankit:roadmap-planning` | Triage ideas into a versioned release plan |
+| `/plankit:mission-breakdown` | Break a roadmap feature into implementation missions |
 
 You don't need to use commands explicitly. PlanKit's skills activate automatically when you discuss relevant topics:
 
@@ -90,7 +90,7 @@ PlanKit/
 
 Features use globally unique 3-digit numbers (never reused, even after deletion). Missions use letters (A–Z). This creates clean cross-references like `005/A`.
 
-The naming convention is auto-detected during `/plan-kit:init` — Swift/Apple projects get UpperCamelCase (shown above), while JS/web projects get kebab-case (`plan-kit/`, `ideas.md`, etc.). The convention is stored in `.config.json`.
+The naming convention is auto-detected during `/plankit:init` — Swift/Apple projects get UpperCamelCase (shown above), while JS/web projects get kebab-case (`plan-kit/`, `ideas.md`, etc.). The convention is stored in `.config.json`.
 
 ## What the Files Look Like
 
@@ -195,11 +195,11 @@ When features or missions are completed (✅), skipped (⏭️), or dropped (�
 
 ### Ideas → Roadmap (Triage)
 
-When you run `/plan-kit:plan-roadmap`, Claude reads your ideas, investigates the codebase, and walks you through each idea: include in this version, skip, or discuss further? For each included feature, Claude asks 1–3 clarifying questions based on what it found in your code — then records the answers as **Key decisions**. Selected ideas are **moved** (not copied) from Ideas to the Roadmap.
+When you run `/plankit:roadmap-planning`, Claude reads your ideas, investigates the codebase, and walks you through each idea: include in this version, skip, or discuss further? For each included feature, Claude asks 1–3 clarifying questions based on what it found in your code — then records the answers as **Key decisions**. Selected ideas are **moved** (not copied) from Ideas to the Roadmap.
 
 ### Roadmap → Missions (Breakdown)
 
-When you run `/plan-kit:define-missions`, Claude reads the roadmap feature, investigates relevant code, and proposes a mission breakdown. You discuss and approve before any files are created. Each mission is designed to be completable in one focused session, with design always as a separate mission before implementation.
+When you run `/plankit:mission-breakdown`, Claude reads the roadmap feature, investigates relevant code, and proposes a mission breakdown. You discuss and approve before any files are created. Each mission is designed to be completable in one focused session, with design always as a separate mission before implementation.
 
 ### Missions → Done (Completion)
 

@@ -30,7 +30,7 @@ Other PlanKit skills trigger these scenarios by loading this skill and specifyin
 
 ### Scenario 1: Mission Completed (or Dropped)
 
-Triggered by the `detail-missions` skill after a mission file is deleted.
+Triggered by the `mission-breakdown` skill after a mission file is deleted.
 
 **Input from calling skill:** mission name, mission letter, feature name, feature number, file path, status (✅ completed or 🛑 dropped), reason (for dropped only), PR numbers (if known).
 
@@ -54,7 +54,7 @@ Triggered by the `detail-missions` skill after a mission file is deleted.
 
 ### Scenario 2: Feature Completed
 
-Triggered by the `detail-missions` skill after all missions are done and the feature folder is deleted.
+Triggered by the `mission-breakdown` skill after all missions are done and the feature folder is deleted.
 
 1. **Read Done.md**
 2. **Find the feature subsection** (should already exist from Scenario 1 mission entries)
@@ -64,7 +64,7 @@ Triggered by the `detail-missions` skill after all missions are done and the fea
 
 ### Scenario 3: Feature Skipped or Dropped
 
-Triggered by the `plan-roadmap` skill when a feature is removed from the roadmap without completion.
+Triggered by the `roadmap-planning` skill when a feature is removed from the roadmap without completion.
 
 **Input:** feature name, feature number (if it had one), version, status (⏭️ skipped or 🛑 dropped), reason.
 
@@ -79,7 +79,7 @@ Triggered by the `plan-roadmap` skill when a feature is removed from the roadmap
 
 ### Scenario 4: Version Released
 
-Triggered by the `plan-roadmap` or `dashboard` skill when a version ships.
+Triggered by the `roadmap-planning` or `dashboard` skill when a version ships.
 
 **Input:** version number, subtitle, release date, list of features with their final statuses.
 

@@ -1,6 +1,6 @@
 {
-  "name": "plan-kit",
-  "version": "0.3.0",
+  "name": "plankit",
+  "version": "0.4.0",
   "description": "Ideas → Roadmap → Missions → Done: 3-level project planning for indie developers",
   "author": {
     "name": "Cihat Gündüz",
