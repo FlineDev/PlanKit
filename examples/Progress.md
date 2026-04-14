@@ -5,7 +5,7 @@
 ### Streak System
 Status: In Progress
 
-Steps:
+Missions:
 - [x] Design Streak Calendar — `Features/005-StreakSystem/A-DesignStreakCalendar.md`
 - [>] Implement Streak Logic — `Features/005-StreakSystem/B-ImplementStreakLogic.md`
 - [ ] Validate Edge Cases — `Features/005-StreakSystem/C-ValidateEdgeCases.md`
@@ -13,7 +13,7 @@ Steps:
 ### Streak Freeze
 Status: Planned
 
-(No steps defined yet)
+(No missions defined yet)
 
 ---
 

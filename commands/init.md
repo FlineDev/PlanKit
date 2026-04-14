@@ -33,7 +33,7 @@ Check if a PlanKit folder already exists:
   Convention: [UpperCamelCase or kebab-case]
   Ideas: [N words across M themes]
   Roadmap: [N features across M versions]
-  Features: [N step files]
+  Features: [N mission files]
 
   ════════════════════════════════════════════════════════════════
   ```
@@ -201,11 +201,11 @@ Before asking the user, proactively search for existing planning documents:
    - **Classify each source document:**
      - Raw ideas/brainstorms/wishlists → Ideas.md
      - Version plans/milestones/roadmaps → Roadmap.md
-     - Detailed feature plans with implementation steps → Features/ directory
+     - Detailed feature plans with implementation missions → Features/ directory
    - **Load the relevant PlanKit skills** to ensure correct formatting:
      - If migrating ideas → read the `capture-ideas` skill and its format reference (IDEAS_FORMAT.md) before writing Ideas.md
      - If migrating a roadmap → read the `plan-roadmap` skill and its format reference (ROADMAP_FORMAT.md) before writing Roadmap.md
-     - If migrating feature plans → read the `detail-steps` skill and its format reference (FEATURES_FORMAT.md) before writing to Features/
+     - If migrating feature plans → read the `detail-missions` skill and its format reference (FEATURES_FORMAT.md) before writing to Features/
    - **Migrate Roadmap first** (if any source contains versioned/prioritized features):
      - Convert to PlanKit roadmap format: each feature group becomes a `### Feature Name` section with description paragraph
      - Checkbox items become descriptive content — do NOT preserve checkbox format
@@ -280,7 +280,7 @@ Migrated:
 
 1. /plan-kit:capture-idea  — Capture ideas anytime
 2. /plan-kit:plan-roadmap  — Plan your next version
-3. /plan-kit:define-steps  — Break features into tasks
+3. /plan-kit:define-missions  — Break features into session-sized missions
 
 Or just talk naturally — PlanKit picks up on
 planning-related conversations automatically.

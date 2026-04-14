@@ -87,8 +87,8 @@ This is the primary workflow — turning ideas into a versioned roadmap:
 10. **Write the version section(s)** in the Roadmap file with all enriched features
 11. **MANDATORY — Create or update Progress.md** (do not skip this step, even when refining an existing roadmap):
     - See [DASHBOARD_FORMAT.md](references/DASHBOARD_FORMAT.md) for the exact format specification.
-    - **If Progress.md doesn't exist**: create with `# Progress`, `## Current: vX.Y — Subtitle`, features as `Status: Planned` + `(No steps yet)`, and `## Released`
-    - **If Progress.md exists with matching version**: merge — preserve existing features with their current status and steps, add only NEW features as `Status: Planned` + `(No steps yet)`
+    - **If Progress.md doesn't exist**: create with `# Progress`, `## Current: vX.Y — Subtitle`, features as `Status: Planned` + `(No missions yet)`, and `## Released`
+    - **If Progress.md exists with matching version**: merge — preserve existing features with their current status and missions, add only NEW features as `Status: Planned` + `(No missions yet)`
     - **If Progress.md exists with a DIFFERENT version**: warn the user that there's active progress on a different version. Use AskUserQuestion with options: "Release current version first" / "Replace current version" / "Cancel". If releasing, follow the dashboard skill's version release flow before proceeding. If replacing, move ALL existing Current features to Released (as-is, with today's date) before writing the new version — this prevents silent data loss.
 12. **Check word count** — auto-split if exceeds threshold
 13. **Summarize** — show what changed: features added/moved/removed, ideas remaining

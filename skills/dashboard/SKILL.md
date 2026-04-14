@@ -5,18 +5,18 @@ description: >
   Project dashboard that tracks progress on the current version. Only
   activates in projects with a PlanKit folder. Triggers automatically
   when the user asks about status or progress, mentions completing a
-  step, or discusses shipping a version. Keywords: progress, status,
+  mission, or discusses shipping a version. Keywords: progress, status,
   what's done, where are we, show progress, how far, what's left,
   current status, mark done, mark complete, ship version, release
-  version, what did we finish, step is done, just finished, we released,
+  version, what did we finish, mission is done, just finished, we released,
   version is out.
 ---
 
 # Dashboard
 
-Automatic project dashboard — tracks feature progress, step completion, and version releases via Progress.md.
+Automatic project dashboard — tracks feature progress, mission completion, and version releases via Progress.md.
 
-This skill has **no command**. It triggers automatically when the user discusses status, completion, or releases. Other PlanKit skills (plan-roadmap, detail-steps) also update Progress.md directly as part of their workflows.
+This skill has **no command**. It triggers automatically when the user discusses status, completion, or releases. Other PlanKit skills (plan-roadmap, detail-missions) also update Progress.md directly as part of their workflows.
 
 ## Config Preamble
 
@@ -45,38 +45,38 @@ When the user asks about status/progress:
    ═══════════════════════════════════════════════════
 
    Feature Name                          [▓▓▓▓░░░░] 2/4
-     ✅ Step One
-     ▶  Step Two (current)
-     ○  Step Three
-     ○  Step Four
+     ✅ Mission One
+     ▶  Mission Two (current)
+     ○  Mission Three
+     ○  Mission Four
 
    Another Feature                       Planned
-     (No steps yet)
+     (No missions yet)
 
    Third Feature                         [▓▓▓▓▓▓▓▓] Done
-     ✅ Only Step
+     ✅ Only Mission
 
    ───────────────────────────────────────────────────
-   Overall: 3/5 steps done · 1 in progress · 1 planned
+   Overall: 3/5 missions done · 1 in progress · 1 planned
    ═══════════════════════════════════════════════════
    ```
 
 3. **Offer actions** if there's something actionable:
-   - If a step is marked `[>]`, mention it's the current focus
-   - If all steps for a feature are `[x]`, suggest marking the feature as Done
+   - If a mission is marked `[>]`, mention it's the current focus
+   - If all missions for a feature are `[x]`, suggest marking the feature as Done
    - If all features are Done, suggest releasing the version
 
-## Update Step Markers
+## Update Mission Markers
 
-When the user says a step is done, in progress, or wants to change status:
+When the user says a mission is done, in progress, or wants to change status:
 
 1. **Read Progress.md**
-2. **Find the step** by name match
+2. **Find the mission** by name match
 3. **Update the marker**:
-   - `[ ]` → `[>]` when starting a step (mark as current)
-   - `[>]` → `[x]` when completing a step
-   - `[ ]` → `[x]` when completing a step directly
-4. **Check feature completion**: if all steps for a feature are `[x]`:
+   - `[ ]` → `[>]` when starting a mission (mark as current)
+   - `[>]` → `[x]` when completing a mission
+   - `[ ]` → `[x]` when completing a mission directly
+4. **Check feature completion**: if all missions for a feature are `[x]`:
    - Update the feature's `Status: In Progress` → `Status: Done`
 5. **Write updated Progress.md**
 6. **Confirm** the change briefly
@@ -96,13 +96,13 @@ When all features are Done or user says the version shipped:
 5. **Archive to Done.md** — load the `done` skill and follow its **Scenario 4: Version Released** instructions
 6. **Confirm** what was released and what carries over
 
-## Recover Deleted Step Content
+## Recover Deleted Mission Content
 
-When a step file has been deleted but the user needs its content:
+When a mission file has been deleted but the user needs its content:
 
-1. **Check Done.md first** — look for the step's `plan:` SHA reference. If found, use it directly: `git show <sha>~1:path/to/file`
+1. **Check Done.md first** — look for the mission's `plan:` SHA reference. If found, use it directly: `git show <sha>~1:path/to/file`
 2. **Fallback to git search**: `git log --all --full-history -- "path/to/file"` then `git show <commit>:path/to/file`
-3. **Find the file path** from the Progress.md step line (in backticks) or Done.md step line
+3. **Find the file path** from the Progress.md mission line (in backticks) or Done.md mission line
 4. **Display the content** to the user
 5. **Offer to recreate** the file if needed
 
@@ -110,10 +110,10 @@ When a step file has been deleted but the user needs its content:
 
 - **No command** — this skill triggers automatically from conversation context
 - **One Current version at a time** — indie devs work on one version; Progress.md has exactly one `## Current:` section
-- **Step markers are authoritative** — `[ ]` not started, `[>]` in progress, `[x]` done
-- **File paths on every step line** — preserved in backticks for git recovery after deletion
-- **Feature status derives from steps** — `Planned` (no steps or all `[ ]`), `In Progress` (any `[>]` or mix of `[x]`/`[ ]`), `Done` (all `[x]`)
-- **Released section is slim** — just version + date + feature name bullets, no step details
+- **Mission markers are authoritative** — `[ ]` not started, `[>]` in progress, `[x]` done
+- **File paths on every mission line** — preserved in backticks for git recovery after deletion
+- **Feature status derives from missions** — `Planned` (no missions or all `[ ]`), `In Progress` (any `[>]` or mix of `[x]`/`[ ]`), `Done` (all `[x]`)
+- **Released section is slim** — just version + date + feature name bullets, no mission details
 - **Progress.md is created lazily** — by the plan-roadmap skill when a version is first planned
 
 ## Format Reference

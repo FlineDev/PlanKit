@@ -43,9 +43,9 @@ Create, edit, and delete custom habits with name, icon, and frequency.
 
 | Marker | Meaning | Used on |
 |--------|---------|---------|
-| ✅ | Completed | Features, steps |
-| ⏭️ | Skipped (never started) | Features, steps |
-| 🛑 | Dropped (started but abandoned) | Features, steps |
+| ✅ | Completed | Features, missions |
+| ⏭️ | Skipped (never started) | Features, missions |
+| 🛑 | Dropped (started but abandoned) | Features, missions |
 
 ## Rules
 
@@ -54,35 +54,35 @@ Create, edit, and delete custom habits with name, icon, and frequency.
    - Start date = when work on this version began (first entry date)
    - End date = when the version was released (blank as `→)` until then)
 3. **H3** = feature entries: `### STATUS NNN-FeatureName`
-   - Features that never got a number (skipped before step creation): `### ⏭️ FeatureName`
+   - Features that never got a number (skipped before mission creation): `### ⏭️ FeatureName`
 4. **Description line** = one sentence summarizing the feature (from Roadmap)
-5. **Step lines** = `- STATUS X-StepName · plan: \`SHA\` · PR #N #M`
+5. **Mission lines** = `- STATUS X-MissionName · plan: \`SHA\` · PR #N #M`
 6. **Reason lines** (⏭️/🛑 only) = plain text after the H3, explaining why
 7. **Version ordering** = newest first, separated by `---`
 8. **Naming convention** follows `.config.json` (UpperCamelCase or kebab-case)
 
-## Step Line Format
+## Mission Line Format
 
 ```
-- STATUS X-StepName · plan: `<sha>` · PR #N
+- STATUS X-MissionName · plan: `<sha>` · PR #N
 ```
 
 - **STATUS** = one of ✅ ⏭️ 🛑
-- **X** = step letter (A–Z)
-- **`plan: \`SHA\``** = short SHA of the commit that deleted the step file
+- **X** = mission letter (A–Z)
+- **`plan: \`SHA\``** = short SHA of the commit that deleted the mission file
 - **`· PR #N`** = optional, one or more PR references separated by spaces
 
-For dropped steps, add reason after `—`:
+For dropped missions, add reason after `—`:
 ```
-- 🛑 C-StepName · plan: `b7c8d9e` — reason for dropping
+- 🛑 C-MissionName · plan: `b7c8d9e` — reason for dropping
 ```
 
 ## Git SHA Recovery
 
-The `plan:` SHA points to the deletion commit. To recover a step file:
+The `plan:` SHA points to the deletion commit. To recover a mission file:
 
 ```bash
-git show <sha>~1:PlanKit/Features/NNN-FeatureName/X-StepName.md
+git show <sha>~1:PlanKit/Features/NNN-FeatureName/X-MissionName.md
 ```
 
 Use `~1` to get the parent commit (which still has the file). The deletion commit itself shows the full file content as removed lines in the diff.

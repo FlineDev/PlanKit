@@ -1,15 +1,15 @@
-# Features / Steps File Format Reference
+# Features / Missions File Format Reference
 
 ## Directory Structure
 
 ```
 PlanKit/Features/               (or plan-kit/features/)
-├── 005-StreakSystem/            Feature with multiple steps
+├── 005-StreakSystem/            Feature with multiple missions
 │   ├── A-DesignStreakCalendar.md
 │   ├── B-ImplementStreakLogic.md
 │   └── C-ValidateEdgeCases.md
-├── 006-SmartReminders.md       Single-step feature (just a file)
-└── 007-StreakMilestones/       Another multi-step feature
+├── 006-SmartReminders.md       Single-mission feature (just a file)
+└── 007-StreakMilestones/       Another multi-mission feature
     ├── A-DesignMilestones.md
     └── B-BuildMilestones.md
 ```
@@ -23,30 +23,30 @@ PlanKit/Features/               (or plan-kit/features/)
 - Format: 3-digit zero-padded (`001`, `002`, ..., `999`)
 - This ensures references like `005/A` remain unambiguous forever
 
-### Steps: Alphabet letters (A–Z)
+### Missions: Alphabet letters (A–Z)
 
-- Steps within a feature use uppercase letters: `A-`, `B-`, `C-`, ...
+- Missions within a feature use uppercase letters: `A-`, `B-`, `C-`, ...
 - Letters are assigned in order of creation, NOT priority
-- Maximum 26 steps per feature — if more are needed, split the feature
+- Maximum 26 missions per feature — if more are needed, split the feature
 - Gaps are fine (if B is deleted, A and C remain — no re-lettering)
 
 ### Cross-referencing
 
-Use `NNN/X` format to reference a specific step:
-- `005/A` = feature 005, step A
-- `005/C` = feature 005, step C
+Use `NNN/X` format to reference a specific mission:
+- `005/A` = feature 005, mission A
+- `005/C` = feature 005, mission C
 - `005` alone refers to the feature as a whole
 
 ## Naming Convention
 
 Follows `.config.json` naming setting:
 
-| Convention | Feature Folder | Step File |
+| Convention | Feature Folder | Mission File |
 |-----------|---------------|-----------|
 | UpperCamelCase | `005-StreakSystem/` | `A-DesignStreakCalendar.md` |
 | kebab-case | `005-streak-system/` | `a-design-streak-calendar.md` |
 
-## Single-Step Feature Format
+## Single-Mission Feature Format
 
 ```markdown
 # Feature Name
@@ -76,10 +76,10 @@ All requirements-level detail: exact numbers, rules, conditions.
 - [ ] User experience scenario to test
 ```
 
-## Multi-Step Feature — Step File Format
+## Multi-Mission Feature — Mission File Format
 
 ```markdown
-# Step Name
+# Mission Name
 
 Feature: Feature Name (from Roadmap vX.Y — Version Subtitle)
 
@@ -95,14 +95,14 @@ Exact numbers, rules, conditions — not code structures.
 
 ## Another Section
 
-More detailed requirements for this step.
+More detailed requirements for this mission.
 
 - [ ] Checkboxes where tracking individual items makes sense
 ```
 
 ## Content Rules
 
-1. **H1** = step name (multi-step) or feature name (single-step)
+1. **H1** = mission name (multi-mission) or feature name (single-mission)
 2. **Subtitle line** = roadmap reference: `Feature: Name (from Roadmap vX.Y — Subtitle)` or `Feature from Roadmap vX.Y — Subtitle`
 3. **Freshness warning** = `⚠️ Created YYYY-MM-DD. Review current codebase before implementing.`
 4. **References** = all links carried from roadmap, listed with brief descriptions
@@ -116,30 +116,39 @@ More detailed requirements for this step.
    - Data Model / UI Layout / Interactions
    - Requirements / Constraints / Edge Cases
 
-## Step Splitting Guidelines
+## Mission Splitting Guidelines
 
-When breaking a feature into steps, follow these principles:
+When breaking a feature into missions, follow these principles:
 
-1. **Design always separate from implementation** — design thinking is its own step
-2. **Content creation separate from code** — writing copy, preparing assets = separate step
-3. **One session ≈ one step** — each step should be completable in roughly one working session
-4. **Small cross-repo changes can combine** — if a step touches 2-3 files in different places, that's fine
-5. **Dependencies flow forward** — step B can depend on A, never the reverse
-6. **Maximum 26 steps** — if a feature needs more, split it into multiple features
+1. **Design always separate from implementation** — design thinking is its own mission
+2. **Content creation separate from code** — writing copy, preparing assets = separate mission
+3. **One session ≈ one mission** — each mission should be completable in roughly one working session
+4. **Small cross-repo changes can combine** — if a mission touches 2-3 files in different places, that's fine
+5. **Dependencies flow forward** — mission B can depend on A, never the reverse
+6. **Maximum 26 missions** — if a feature needs more, split it into multiple features
+
+## Executing a Mission
+
+A mission file just defines the work — execution is a separate concern. Two common paths:
+
+- **Claude Code directly** — open the mission file, implement interactively, iterate.
+- **[TandemKit](https://github.com/FlineDev/TandemKit)** — hand the mission off to a Planner / Generator / Evaluator loop coordinating Claude + Codex for a more autonomous pass.
+
+Either way, the mission file is the source of truth for what needs to be built.
 
 ## Lifecycle
 
-### Step Completion
-When a step is fully done:
-- Suggest deleting the step file (tip: commit to git first)
+### Mission Completion
+When a mission is fully done:
+- Suggest deleting the mission file (tip: commit to git first)
 - If user confirms → delete the file
-- Load the `done` skill and follow **Scenario 1: Step Completed** to archive it
-- If ALL steps in a feature folder are done → offer to delete the entire folder
+- Load the `done` skill and follow **Scenario 1: Mission Completed** to archive it
+- If ALL missions in a feature folder are done → offer to delete the entire folder
 - Mark the corresponding roadmap feature with ✅
 - Load the `done` skill and follow **Scenario 2: Feature Completed**
 
 ### Incomplete Aspects
 If aspects are discovered during implementation that weren't planned:
-- Add them to another existing step file if they fit
+- Add them to another existing mission file if they fit
 - Or note in the roadmap feature: "Partially implemented — [aspect] needs follow-up"
 - Or capture as a new idea in the Ideas file for future planning

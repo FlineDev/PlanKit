@@ -10,7 +10,7 @@
 ### Feature Name
 Status: In Progress
 
-Steps:
+Missions:
 - [x] Design Streak Calendar — `Features/005-StreakSystem/A-DesignStreakCalendar.md`
 - [>] Implement Streak Logic — `Features/005-StreakSystem/B-ImplementStreakLogic.md`
 - [ ] Validate Edge Cases — `Features/005-StreakSystem/C-ValidateEdgeCases.md`
@@ -18,12 +18,12 @@ Steps:
 ### Another Feature
 Status: Planned
 
-(No steps yet)
+(No missions yet)
 
 ### Simple Feature
 Status: Done
 
-Steps:
+Missions:
 - [x] Fix Login Button — `Features/006-SmartReminders.md`
 
 ---
@@ -46,10 +46,10 @@ Steps:
 3. **H2 Released** = `## Released` — completed versions, separated by `---` from Current
 4. **H3** = feature names within the current version
 5. **Status line** = `Status: Planned | In Progress | Done` — one per feature, on the line after H3
-6. **Steps list** = checkbox-style lines with file paths in backticks
-7. **No steps yet** = `(No steps yet)` when feature has no step breakdown
+6. **Missions list** = checkbox-style lines with file paths in backticks
+7. **No missions yet** = `(No missions yet)` when feature has no mission breakdown
 
-## Step Markers
+## Mission Markers
 
 | Marker | Meaning | Display |
 |--------|---------|---------|
@@ -57,27 +57,27 @@ Steps:
 | `[>]` | In progress (current) | ▶ |
 | `[x]` | Done | ✅ |
 
-## Step Line Format
+## Mission Line Format
 
 ```
-- [marker] Step Name — `Features/NNN-FeatureName/X-StepName.md`
+- [marker] Mission Name — `Features/NNN-FeatureName/X-MissionName.md`
 ```
 
-- Step name matches the H1 of the step file
+- Mission name matches the H1 of the mission file
 - File path is relative to the PlanKit folder, in backticks
-- `NNN` = 3-digit global feature number, `X` = step letter (A-Z)
-- Single-step features use the file path directly: `Features/NNN-FeatureName.md`
+- `NNN` = 3-digit global feature number, `X` = mission letter (A-Z)
+- Single-mission features use the file path directly: `Features/NNN-FeatureName.md`
 
 ## Feature Status Rules
 
-Status is derived from step markers:
+Status is derived from mission markers:
 
 | Condition | Status |
 |-----------|--------|
-| No steps yet | `Planned` |
-| All steps `[ ]` | `Planned` |
+| No missions yet | `Planned` |
+| All missions `[ ]` | `Planned` |
 | Any `[>]` or mix of `[x]` and `[ ]` | `In Progress` |
-| All steps `[x]` | `Done` |
+| All missions `[x]` | `Done` |
 
 ## Naming Convention
 
@@ -102,14 +102,14 @@ When a version ships, its features are slimmed to a brief entry:
 ```
 
 - Date is the release date in ISO format
-- Features are just bullet names, no steps or status
+- Features are just bullet names, no missions or status
 - Newest released version at top
 
 ## Carry-Over Rules
 
 When a version ships but some features are incomplete:
 - Move incomplete features to a new `## Current:` section for the next version
-- Preserve their status, steps, and file paths
+- Preserve their status, missions, and file paths
 - Add a note if relevant: "Carried from vX.Y"
 
 ## Creation
@@ -124,12 +124,12 @@ Progress.md is created **lazily** by the plan-roadmap skill when the first versi
 ### Feature Name
 Status: Planned
 
-(No steps yet)
+(No missions yet)
 
 ### Another Feature
 Status: Planned
 
-(No steps yet)
+(No missions yet)
 
 ---
 

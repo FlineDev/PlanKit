@@ -1,7 +1,7 @@
 {
   "name": "plan-kit",
-  "version": "0.2.0",
-  "description": "Ideas → Roadmap → Steps → Done: 3-level project planning for indie developers",
+  "version": "0.3.0",
+  "description": "Ideas → Roadmap → Missions → Done: 3-level project planning for indie developers",
   "author": {
     "name": "Cihat Gündüz",
     "url": "https://fline.dev"
@@ -9,5 +9,5 @@
   "homepage": "https://github.com/FlineDev/PlanKit",
   "repository": "https://github.com/FlineDev/PlanKit",
   "license": "MIT",
-  "keywords": ["planning", "ideas", "roadmap", "steps", "indie", "project-management"]
+  "keywords": ["planning", "ideas", "roadmap", "missions", "indie", "project-management"]
 }
